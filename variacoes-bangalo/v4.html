@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bangalo Azul, Pousada Lagoa Caraiva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+/* ========================================
+   V4, Monocle / Wallpaper*
+   ======================================== */
+*,*::before,*::after{box-sizing:border-box}
+body {
+  background: #25455A;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  line-height: 1.75;
+  margin: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Nav --- */
+.v-nav {
+  position: fixed;
+  top: 1.5rem;
+  z-index: 100;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.v-nav--left { left: 1.5rem; }
+.v-nav--right { right: 1.5rem; }
+.v-nav a {
+  color: rgba(255,255,255,.55);
+  text-decoration: none;
+  transition: color .3s;
+  padding: 0.15em 0.3em;
+}
+.v-nav a:hover, .v-nav a.is-active { color: #fff; }
+
+/* --- Title block (no hero) --- */
+.title-block {
+  padding: 10rem 2rem 3rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.title-block h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(5rem, 14vw, 10rem);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+.title-block .specs {
+  margin-top: 2rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  line-height: 2;
+}
+
+/* --- Numbered photo --- */
+.numbered-photo {
+  width: 90%;
+  max-width: 1100px;
+  margin: 3.5rem auto;
+}
+.numbered-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.numbered-photo__caption {
+  margin-top: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.4;
+}
+
+/* --- Editorial text --- */
+.editorial {
+  max-width: 640px;
+  margin: 4rem auto;
+  padding: 0 2rem;
+}
+.editorial p {
+  font-size: 1rem;
+  line-height: 1.9;
+  opacity: 0.82;
+}
+
+/* --- Sensory numbered list --- */
+.sensory-list {
+  max-width: 640px;
+  margin: 4rem auto;
+  padding: 0 2rem;
+}
+.sensory-list h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 1.75rem;
+  margin-bottom: 2.5rem;
+  letter-spacing: -0.01em;
+}
+.sensory-list__item {
+  margin-bottom: 2rem;
+  padding-left: 3.5rem;
+  position: relative;
+}
+.sensory-list__item .num {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  opacity: 0.4;
+}
+.sensory-list__item h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+}
+.sensory-list__item p {
+  font-size: 0.92rem;
+  line-height: 1.85;
+  opacity: 0.72;
+}
+
+/* --- Specs table --- */
+.specs-table {
+  max-width: 640px;
+  margin: 4rem auto;
+  padding: 0 2rem;
+}
+.specs-table h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+}
+.specs-table__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.specs-table__row:first-of-type {
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.specs-table__label {
+  font-size: 0.82rem;
+  opacity: 0.55;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.specs-table__value {
+  font-size: 0.88rem;
+  opacity: 0.85;
+  text-align: right;
+}
+
+/* --- Photo strip --- */
+.strip {
+  display: flex;
+  gap: 0.6rem;
+  padding: 3.5rem 2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.strip::-webkit-scrollbar { height: 3px; }
+.strip::-webkit-scrollbar-track { background: transparent; }
+.strip::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 2px; }
+.strip img {
+  height: 260px;
+  width: auto;
+  flex-shrink: 0;
+  border-radius: 3px;
+  scroll-snap-align: start;
+  cursor: pointer;
+  transition: transform .35s;
+}
+.strip img:hover { transform: scale(1.025); }
+
+/* --- Quote --- */
+.quote {
+  max-width: 660px;
+  margin: 4rem auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+.quote blockquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.15rem, 2.8vw, 1.55rem);
+  font-weight: 300;
+  line-height: 1.65;
+  opacity: 0.9;
+  margin: 0;
+}
+.quote cite {
+  display: block;
+  margin-top: 1.2rem;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-size: 0.73rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.42;
+}
+
+/* --- CTA --- */
+.cta {
+  text-align: center;
+  padding: 3rem 2rem 6.5rem;
+}
+.cta a {
+  display: inline-block;
+  padding: 1rem 2.75rem;
+  border: 1px solid rgba(255,255,255,.3);
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: background .3s, border-color .3s;
+}
+.cta a:hover {
+  background: rgba(255,255,255,.07);
+  border-color: rgba(255,255,255,.6);
+}
+
+/* --- Lightbox --- */
+.lb {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.93);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.lb.is-open { display: flex; }
+.lb img {
+  max-width: 92vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 3px;
+}
+
+@media (max-width: 768px) {
+  .title-block { padding-top: 7rem; }
+  .title-block h1 { font-size: 4rem; }
+  .numbered-photo { width: 95%; }
+  .sensory-list__item { padding-left: 2.75rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="v-nav v-nav--left"><a href="v1.html">01</a></nav>
+<nav class="v-nav v-nav--right">
+  <a href="v2.html">02</a> &middot;
+  <a href="v3.html">03</a> &middot;
+  <a href="v4.html" class="is-active">04</a> &middot;
+  <a href="v5.html">05</a>
+</nav>
+
+<!-- Title, no hero photo, oversized serif -->
+<header class="title-block">
+  <h1>Azul</h1>
+  <div class="specs">
+    Bangalo de casal &middot; 45 m² &middot; Cama extra &middot; Varanda<br>
+    Pousada Lagoa Caraiva &middot; Bahia &middot; Brasil
+  </div>
+</header>
+
+<!-- 01, Varanda -->
+<div class="numbered-photo">
+  <img src="../assets/azul/1-menino-na-rede.jpg" alt="Varanda do Bangalo Azul com rede" data-lb>
+  <p class="numbered-photo__caption">01, Varanda</p>
+</div>
+
+<!-- Editorial text -->
+<div class="editorial">
+  <p>Um dos tres bangalos de casal da Pousada Lagoa Caraiva. Quarenta e cinco metros quadrados de arquitetura local, preservada ha mais de trinta anos, distribuidos com quinze metros de distancia entre cada unidade, privacidade como principio, nao como acaso. O jardim tropical de sete mil metros quadrados circunda tudo. Caraiva, a vila sem carros a que se chega apenas de canoa, faz o resto.</p>
+</div>
+
+<!-- 02, Interior -->
+<div class="numbered-photo">
+  <img src="../assets/azul/2-cama.jpg" alt="Interior do Bangalo Azul" data-lb>
+  <p class="numbered-photo__caption">02, Interior</p>
+</div>
+
+<!-- Sensory numbered list -->
+<div class="sensory-list">
+  <h2>Os sentidos do lugar</h2>
+
+  <div class="sensory-list__item">
+    <span class="num">01</span>
+    <h3>Aromas</h3>
+    <p>Brisa do mar na varanda. O jardim de flores tropicais exala um perfume que muda ao longo do dia. Pela manha, o cafe da manha, preparado com ingredientes locais, traz seu proprio aroma, misturado ao frescor do jardim.</p>
+  </div>
+
+  <div class="sensory-list__item">
+    <span class="num">02</span>
+    <h3>Sons</h3>
+    <p>O silencio de uma vila sem carros. Ondas do mar e a agua do rio se misturam ao canto dos passaros e ao vento entre as folhas do jardim. Na mesa do cafe, conversas em volume baixo entre hospedes.</p>
+  </div>
+
+  <div class="sensory-list__item">
+    <span class="num">03</span>
+    <h3>Texturas</h3>
+    <p>Pes descalcos na areia fresca de Caraiva. A rede da varanda que balanca com o vento constante. A agua doce e fresca do rio. O frescor da sombra no jardim tropical.</p>
+  </div>
+</div>
+
+<!-- 03, Jardim -->
+<div class="numbered-photo">
+  <img src="../assets/azul/IMG_9782-2.jpg" alt="Jardim tropical" data-lb>
+  <p class="numbered-photo__caption">03, Jardim</p>
+</div>
+
+<!-- Specs table -->
+<div class="specs-table">
+  <h2>Ficha tecnica</h2>
+  <div class="specs-table__row">
+    <span class="specs-table__label">Area</span>
+    <span class="specs-table__value">45 m²</span>
+  </div>
+  <div class="specs-table__row">
+    <span class="specs-table__label">Tipo</span>
+    <span class="specs-table__value">Bangalo de casal</span>
+  </div>
+  <div class="specs-table__row">
+    <span class="specs-table__label">Cama extra</span>
+    <span class="specs-table__value">Disponivel</span>
+  </div>
+  <div class="specs-table__row">
+    <span class="specs-table__label">Varanda</span>
+    <span class="specs-table__value">Com rede</span>
+  </div>
+  <div class="specs-table__row">
+    <span class="specs-table__label">Banheiro</span>
+    <span class="specs-table__value">Privativo</span>
+  </div>
+  <div class="specs-table__row">
+    <span class="specs-table__label">Cafe da manha</span>
+    <span class="specs-table__value">Incluso, ingredientes locais</span>
+  </div>
+  <div class="specs-table__row">
+    <span class="specs-table__label">Distancia entre bangalos</span>
+    <span class="specs-table__value">~15 m</span>
+  </div>
+  <div class="specs-table__row">
+    <span class="specs-table__label">Area do jardim</span>
+    <span class="specs-table__value">7.000 m²</span>
+  </div>
+  <div class="specs-table__row">
+    <span class="specs-table__label">Arquitetura</span>
+    <span class="specs-table__value">Local, 30+ anos</span>
+  </div>
+  <div class="specs-table__row">
+    <span class="specs-table__label">Booking.com</span>
+    <span class="specs-table__value">Nota 9.4</span>
+  </div>
+</div>
+
+<!-- Photo strip -->
+<div class="strip">
+  <img src="../assets/azul/3-planta.jpg" alt="Vegetacao" data-lb>
+  <img src="../assets/azul/4-cama-sofa-porta.jpg" alt="Interior" data-lb>
+  <img src="../assets/azul/6-banheiro1.jpg" alt="Banheiro" data-lb>
+  <img src="../assets/azul/7-banheiro2.jpg" alt="Banheiro detalhe" data-lb>
+  <img src="../assets/azul/8-almofadas.jpg" alt="Almofadas" data-lb>
+  <img src="../assets/azul/IMG_9758-2.jpg" alt="Exterior" data-lb>
+  <img src="../assets/azul/IMG_9764-2.jpg" alt="Jardim" data-lb>
+  <img src="../assets/azul/IMG_9766-2.jpg" alt="Detalhe" data-lb>
+  <img src="../assets/azul/IMG_9767-2.jpg" alt="Ambiente" data-lb>
+  <img src="../assets/azul/IMG_9786-2.jpg" alt="Paisagem" data-lb>
+  <img src="../assets/azul/IMG_9819-2.jpg" alt="Entardecer" data-lb>
+</div>
+
+<!-- Quote -->
+<div class="quote">
+  <blockquote>"Um refugio natural, com poucos chales, em meio a duas lagoas, arvores e muita paz. Lugar ideal para quem quer relaxar."</blockquote>
+  <cite>Rita, Booking.com, Nota 10</cite>
+</div>
+
+<!-- CTA -->
+<div class="cta">
+  <a href="#" onclick="openBooking();return false">Reservar Bangalo Azul</a>
+</div>
+
+<!-- Lightbox -->
+<div class="lb" id="lb"><img src="" alt=""></div>
+
+<script>
+(function(){
+  var lb=document.getElementById('lb'),lbImg=lb.querySelector('img');
+  document.querySelectorAll('[data-lb]').forEach(function(el){
+    el.style.cursor='pointer';
+    el.addEventListener('click',function(){lbImg.src=el.src;lbImg.alt=el.alt;lb.classList.add('is-open')});
+  });
+  lb.addEventListener('click',function(){lb.classList.remove('is-open')});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('is-open')});
+})();
+</script>
+  <script src="/assets/js/widgets.js?v=2605312048" defer></script>
+</body>
+</html>

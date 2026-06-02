@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O convite, V3 · Verde claro tropical</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css?v=20260525">
+  <style>
+    body { margin: 0; background: #1f3328; }
+    .v-letter {
+      position: relative;
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 4vw, 3rem);
+      background:
+        radial-gradient(ellipse at 25% 30%, rgba(149,176,128,0.25), transparent 60%),
+        radial-gradient(ellipse at 80% 75%, rgba(50,80,55,0.5), transparent 60%),
+        linear-gradient(170deg, #2e4a3a 0%, #1a2c22 100%);
+    }
+    .v-card {
+      position: relative;
+      max-width: 640px;
+      background: linear-gradient(160deg, #e8e3d2 0%, #d8d2bd 100%);
+      padding: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vw, 3.5rem);
+      box-shadow: 0 35px 80px -20px rgba(10,30,20,0.6), 0 0 0 1px rgba(70,80,55,0.1);
+      border-radius: 2px;
+    }
+    .v-eyebrow {
+      font-size: 0.7rem; letter-spacing: 0.32em; text-transform: uppercase;
+      color: #4a5a3a; margin-bottom: 1rem; text-align: center;
+    }
+    .v-title {
+      font-family: var(--font-display);
+      font-style: italic; font-weight: 400;
+      font-size: clamp(1.875rem, 4vw, 3rem);
+      color: #2c3c2a; text-align: center;
+      margin-bottom: 2.5rem; line-height: 1.1;
+    }
+    .v-title em { color: #5a6e3a; }
+    .v-body {
+      font-family: var(--font-display);
+      font-style: italic; font-weight: 300;
+      font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+      line-height: 1.75;
+      color: #3a4530;
+    }
+    .v-body p { margin: 0 0 1.25rem; }
+    .v-sign {
+      font-family: 'Caveat', cursive;
+      font-style: normal;
+      font-size: 1.85rem;
+      color: #4a5a3a;
+      margin-top: 1.5rem !important;
+    }
+    .v-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2.5rem; }
+    .v-btn {
+      padding: 0.85rem 1.75rem; font-size: 0.85rem; letter-spacing: 0.06em;
+      text-decoration: none; border-radius: 2px;
+    }
+    .v-btn--primary { background: #2c3c2a; color: #e8e3d2; }
+    .v-btn--secondary { border: 1px solid #4a5a3a; color: #4a5a3a; }
+  </style>
+</head>
+<body>
+  <section class="v-letter">
+    <article class="v-card">
+      <p class="v-eyebrow">Caraíva, Bahia</p>
+      <h2 class="v-title">O <em>convite.</em></h2>
+      <div class="v-body">
+        <p>Querido viajante,</p>
+        <p>Eu vim de longe e fiquei. Hoje, vinte e tantos anos depois, ainda me surpreendo com a maneira como Caraíva muda o ritmo de quem chega.</p>
+        <p>Não tem como passar pelo rio de canoa e continuar com pressa. A vila não permite. As vitórias-régias não permitem. As manhãs aqui são morosas, mornas, e a gente prepara cada café como se você fosse da família.</p>
+        <p>Se Caraíva já te chamou, atravesse. Tem uma rede te esperando.</p>
+        <p class="v-sign">Herminia, anfitriã.</p>
+      </div>
+      <div class="v-ctas">
+        <a href="#" class="v-btn v-btn--primary">Verificar datas</a>
+        <a href="#" class="v-btn v-btn--secondary">Escrever pelo WhatsApp</a>
+      </div>
+    </article>
+  </section>
+</body>
+</html>

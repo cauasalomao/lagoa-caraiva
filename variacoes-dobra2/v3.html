@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Dobra 2, V3 · Foto full-bleed + texto sobreposto</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css?v=20260525">
+  <style>
+    body { background: var(--paper); margin: 0; }
+
+    .dobra2 {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .dobra2__media {
+      position: absolute; inset: 0;
+      margin: 0;
+    }
+    .dobra2__media img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .dobra2__media::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(100deg, rgba(31, 51, 40, 0.85) 0%, rgba(31, 51, 40, 0.55) 45%, rgba(31, 51, 40, 0.15) 80%);
+    }
+    .dobra2__copy {
+      position: relative; z-index: 2;
+      max-width: 560px;
+      padding: clamp(4rem, 8vw, 6rem) clamp(2rem, 6vw, 6rem);
+      color: var(--sand);
+    }
+    .dobra2__eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(237, 227, 210, 0.7);
+      margin-bottom: 2.5rem;
+    }
+    .dobra2__title {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(2rem, 1.4rem + 2.4vw, 3.5rem);
+      line-height: 1.18;
+      margin-bottom: 2.25rem;
+      letter-spacing: 0.005em;
+    }
+    .dobra2__title em {
+      font-style: italic;
+      color: rgba(237, 227, 210, 0.78);
+    }
+    .dobra2__text {
+      font-size: 1.0625rem;
+      line-height: 1.8;
+      color: rgba(237, 227, 210, 0.85);
+      max-width: 440px;
+    }
+
+    @media (max-width: 900px) {
+      .dobra2 { min-height: 70vh; }
+      .dobra2__media::after {
+        background: linear-gradient(180deg, rgba(31, 51, 40, 0.3) 0%, rgba(31, 51, 40, 0.85) 100%);
+      }
+      .dobra2__copy { padding: 3rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <section class="dobra2">
+    <figure class="dobra2__media">
+      <img src="../assets/img/barcos-aerea.jpg" alt="Barcos no rio Caraíva ao entardecer">
+    </figure>
+    <div class="dobra2__copy">
+      <p class="dobra2__eyebrow">Costa do descobrimento</p>
+      <h2 class="dobra2__title">Mais do que uma Pousada, uma <em>experiência que transcende o tempo.</em></h2>
+      <p class="dobra2__text">Uma vila que ainda existe, onde o tempo passa no ritmo da maré e o rio encontra o mar em silêncio.</p>
+    </div>
+  </section>
+</body>
+</html>

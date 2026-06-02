@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Variações, Acomodações · Lagoa Caraíva</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/assets/css/main.css?v=20260520b">
+  <link rel="stylesheet" href="/assets/css/home-v2.css?v=20260520b">
+  <style>
+    :root { --ink: #1d2418; --paper: #f5efe4; }
+    body { background: var(--paper); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; margin: 0; }
+
+    .lab-header { padding: 4rem var(--gutter) 2rem; max-width: 1100px; margin: 0 auto; text-align: center; }
+    .lab-header h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); margin: 0 0 .5rem; font-weight: 400; }
+    .lab-header p { opacity: .7; margin: 0; }
+
+    .lab-divider {
+      max-width: 1100px;
+      margin: 5rem auto 0;
+      padding: 2.5rem var(--gutter) 1rem;
+      border-top: 1px solid rgba(0,0,0,.12);
+    }
+    .lab-divider__tag { display: inline-block; font-size: .65rem; letter-spacing: .3em; text-transform: uppercase; font-weight: 600; padding: .3rem .6rem; border: 1px solid currentColor; border-radius: 999px; margin-bottom: 1rem; }
+    .lab-divider h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); margin: 0 0 .5rem; font-weight: 400; }
+    .lab-divider p { margin: 0; opacity: .7; max-width: 60ch; }
+
+    /* =====================================================
+       V1, Grid 3 colunas (comparativo, sintético)
+       ===================================================== */
+    .v1 { max-width: 1320px; margin: 2rem auto 0; padding: 2rem var(--gutter); }
+    .v1__head { text-align: center; margin-bottom: 3rem; }
+    .v1__head h3 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 400; margin: 0 0 .75rem; }
+    .v1__head h3 em { font-style: italic; opacity: .8; }
+    .v1__head p { max-width: 56ch; margin: 0 auto; opacity: .7; }
+    .v1__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .v1__card { display: flex; flex-direction: column; background: #fff; border-radius: 6px; overflow: hidden; box-shadow: 0 8px 24px -16px rgba(0,0,0,.2); transition: transform .35s ease; }
+    .v1__card:hover { transform: translateY(-4px); }
+    .v1__img { aspect-ratio: 4/3; background: linear-gradient(135deg, #d4c5a8, #9ba88a); display: grid; place-items: center; color: rgba(0,0,0,.35); font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; }
+    .v1__body { padding: 1.5rem 1.5rem 1.75rem; flex: 1; display: flex; flex-direction: column; }
+    .v1__name { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 500; margin: 0 0 .5rem; }
+    .v1__chips { display: flex; flex-wrap: wrap; gap: .35rem; margin: 0 0 1rem; }
+    .v1__chip { font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; padding: .3rem .55rem; border-radius: 999px; background: rgba(0,0,0,.06); }
+    .v1__copy { font-size: .9rem; line-height: 1.55; opacity: .8; margin: 0 0 1.5rem; flex: 1; }
+    .v1__cta { font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; text-decoration: none; color: inherit; border-bottom: 1px solid currentColor; padding-bottom: 3px; align-self: flex-start; }
+    @media (max-width: 900px) { .v1__grid { grid-template-columns: 1fr; } }
+
+    /* =====================================================
+       V2, Tabs / categorias selecionáveis (editorial)
+       ===================================================== */
+    .v2 { background: #1d2418; color: #ede3d2; padding: 5rem 0; }
+    .v2__inner { max-width: 1200px; margin: 0 auto; padding: 0 var(--gutter); }
+    .v2__head { text-align: center; margin-bottom: 2.5rem; }
+    .v2__head h3 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 400; margin: 0 0 .75rem; }
+    .v2__head em { font-style: italic; opacity: .8; }
+    .v2__tabs { display: flex; justify-content: center; gap: .5rem; margin-bottom: 3rem; flex-wrap: wrap; }
+    .v2__tab { padding: .8rem 1.5rem; background: transparent; color: #ede3d2; border: 1px solid rgba(237,227,210,.3); border-radius: 999px; font-family: inherit; font-size: .8rem; letter-spacing: .15em; text-transform: uppercase; cursor: pointer; transition: all .25s ease; }
+    .v2__tab:hover { border-color: rgba(237,227,210,.7); }
+    .v2__tab.is-active { background: #ede3d2; color: #1d2418; border-color: #ede3d2; }
+    .v2__panel { display: none; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: center; }
+    .v2__panel.is-active { display: grid; }
+    .v2__img { aspect-ratio: 4/3; background: linear-gradient(135deg, #3a4a32, #2c3c2a); display: grid; place-items: center; color: rgba(237,227,210,.35); font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; border-radius: 4px; }
+    .v2__name { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 2.75rem); margin: 0 0 1rem; font-weight: 400; }
+    .v2__name em { font-style: italic; opacity: .8; }
+    .v2__colors { display: flex; gap: .5rem; margin-bottom: 1.25rem; }
+    .v2__color-dot { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(237,227,210,.4); }
+    .v2__meta { display: grid; grid-template-columns: auto 1fr; gap: .35rem 1.5rem; font-size: .85rem; margin: 1.25rem 0 1.75rem; }
+    .v2__meta dt { opacity: .55; letter-spacing: .12em; text-transform: uppercase; font-size: .7rem; align-self: center; }
+    .v2__meta dd { margin: 0; }
+    .v2__copy { font-size: .95rem; line-height: 1.65; opacity: .85; margin: 0 0 2rem; max-width: 50ch; }
+    .v2__cta { display: inline-block; padding: .9rem 1.75rem; background: #ede3d2; color: #1d2418; text-decoration: none; font-size: .8rem; letter-spacing: .15em; text-transform: uppercase; border-radius: 2px; }
+    @media (max-width: 800px) { .v2__panel { grid-template-columns: 1fr; gap: 2rem; } }
+
+    /* =====================================================
+       V3, Bento assimétrico (hierarquia visual)
+       ===================================================== */
+    .v3 { background: #f5efe4; padding: 5rem var(--gutter); }
+    .v3__inner { max-width: 1200px; margin: 0 auto; }
+    .v3__head { margin-bottom: 3rem; max-width: 60ch; }
+    .v3__head h3 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 400; margin: 0 0 .75rem; }
+    .v3__head em { font-style: italic; opacity: .8; }
+    .v3__head p { opacity: .7; margin: 0; }
+    .v3__bento { display: grid; grid-template-columns: 1.4fr 1fr; grid-template-rows: 1fr 1fr; gap: 1.25rem; min-height: 580px; }
+    .v3__cell { position: relative; border-radius: 6px; overflow: hidden; color: #ede3d2; display: flex; align-items: flex-end; padding: 2rem; min-height: 280px; }
+    .v3__cell::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,.75) 100%); z-index: 1; }
+    .v3__cell > * { position: relative; z-index: 2; }
+    .v3__cell--main { grid-row: span 2; background: linear-gradient(135deg, #d4a86a, #b07d3c); }
+    .v3__cell--med { background: linear-gradient(135deg, #ede3d2, #c5b89a); color: #1d2418; }
+    .v3__cell--med::before { background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,.15) 100%); }
+    .v3__cell--big { background: linear-gradient(135deg, #c8a9d4, #8b6da3); }
+    .v3__tag { display: inline-block; font-size: .65rem; letter-spacing: .25em; text-transform: uppercase; padding: .3rem .65rem; background: rgba(255,255,255,.18); border-radius: 999px; margin-bottom: .75rem; backdrop-filter: blur(8px); }
+    .v3__cell--med .v3__tag { background: rgba(0,0,0,.08); }
+    .v3__cell-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 2.5vw, 2.25rem); font-weight: 400; margin: 0 0 .5rem; line-height: 1.1; }
+    .v3__cell-name em { font-style: italic; }
+    .v3__cell-meta { font-size: .8rem; opacity: .85; margin: 0 0 .25rem; }
+    .v3__cell-colors { font-size: .75rem; opacity: .7; letter-spacing: .1em; }
+    @media (max-width: 800px) {
+      .v3__bento { grid-template-columns: 1fr; grid-template-rows: auto; }
+      .v3__cell--main { grid-row: auto; min-height: 320px; }
+    }
+
+    .lab-footer { padding: 4rem var(--gutter); text-align: center; opacity: .5; font-size: .8rem; }
+    .lab-footer a { color: inherit; }
+  </style>
+</head>
+<body>
+
+  <header class="lab-header">
+    <h1>Variações, Dobra Acomodações</h1>
+    <p>Role para baixo para comparar três abordagens diferentes da mesma seção.</p>
+  </header>
+
+  <!-- ====== V1 ====== -->
+  <div class="lab-divider">
+    <span class="lab-divider__tag">Variação 1</span>
+    <h2>Grid de cartões comparativos</h2>
+    <p>Três colunas lado a lado, mesma hierarquia. Leitura rápida, fácil comparação. Bom quando todas as opções têm peso equivalente.</p>
+  </div>
+
+  <section class="v1">
+    <header class="v1__head">
+      <h3>Seu lar, <em>enquanto estiver conosco.</em></h3>
+      <p>Bangalôs privativos, projetados em arquitetura local, construídos com a experiência de quem entende o que faz sentido no contexto da vila.</p>
+    </header>
+    <div class="v1__grid">
+      <article class="v1__card">
+        <div class="v1__img">Foto · casal</div>
+        <div class="v1__body">
+          <h4 class="v1__name">Para casais</h4>
+          <div class="v1__chips">
+            <span class="v1__chip">Amarelo</span>
+            <span class="v1__chip">Azul</span>
+            <span class="v1__chip">Laranja</span>
+          </div>
+          <p class="v1__copy">Três bangalôs nomeados pelas janelas, com cerca de quinze metros entre cada um para máxima privacidade.</p>
+          <a href="#" class="v1__cta">Ver bangalôs</a>
+        </div>
+      </article>
+      <article class="v1__card">
+        <div class="v1__img">Foto · família 5</div>
+        <div class="v1__body">
+          <h4 class="v1__name">Famílias até 5</h4>
+          <div class="v1__chips">
+            <span class="v1__chip">Branco</span>
+          </div>
+          <p class="v1__copy">Dois ambientes, uma suíte com cama king e um quarto com queen mais cama de solteiro.</p>
+          <a href="#" class="v1__cta">Ver bangalô</a>
+        </div>
+      </article>
+      <article class="v1__card">
+        <div class="v1__img">Foto · família 7</div>
+        <div class="v1__body">
+          <h4 class="v1__name">Famílias até 7</h4>
+          <div class="v1__chips">
+            <span class="v1__chip">Lilás</span>
+          </div>
+          <p class="v1__copy">O maior. Suíte king mais ambiente amplo com queen e três camas de solteiro, para grupos.</p>
+          <a href="#" class="v1__cta">Ver bangalô</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ====== V2 ====== -->
+  <div class="lab-divider">
+    <span class="lab-divider__tag">Variação 2</span>
+    <h2>Tabs editoriais com foco</h2>
+    <p>Uma categoria por vez, em destaque. Mais imersivo, foto grande, copy longa. Bom quando você quer narrar cada categoria.</p>
+  </div>
+
+  <section class="v2">
+    <div class="v2__inner">
+      <header class="v2__head">
+        <h3>Seu lar, <em>enquanto estiver conosco.</em></h3>
+      </header>
+      <div class="v2__tabs">
+        <button class="v2__tab is-active" data-tab="casais">Casais</button>
+        <button class="v2__tab" data-tab="fam5">Famílias até 5</button>
+        <button class="v2__tab" data-tab="fam7">Famílias até 7</button>
+      </div>
+
+      <div class="v2__panel is-active" data-panel="casais">
+        <div class="v2__img">Foto · casal</div>
+        <div>
+          <h4 class="v2__name">Bangalôs de <em>casal</em></h4>
+          <div class="v2__colors">
+            <span class="v2__color-dot" style="background:#e0c57a"></span>
+            <span class="v2__color-dot" style="background:#5b7fa8"></span>
+            <span class="v2__color-dot" style="background:#d68b4a"></span>
+          </div>
+          <dl class="v2__meta">
+            <dt>Quantidade</dt><dd>3 bangalôs</dd>
+            <dt>Área</dt><dd>45 m² cada</dd>
+            <dt>Cama</dt><dd>King</dd>
+            <dt>Privacidade</dt><dd>~15 m entre eles</dd>
+          </dl>
+          <p class="v2__copy">Amarelo, Azul e Laranja, três bangalôs nomeados pelas janelas. Cada um com 45 m², cama king e cerca de quinze metros de distância entre si para máxima privacidade.</p>
+          <a href="#" class="v2__cta">Ver bangalôs de casal</a>
+        </div>
+      </div>
+
+      <div class="v2__panel" data-panel="fam5">
+        <div class="v2__img">Foto · família 5</div>
+        <div>
+          <h4 class="v2__name">Famílias <em>até 5</em></h4>
+          <div class="v2__colors">
+            <span class="v2__color-dot" style="background:#f5efe4"></span>
+          </div>
+          <dl class="v2__meta">
+            <dt>Bangalô</dt><dd>Branco</dd>
+            <dt>Capacidade</dt><dd>Até 5 pessoas</dd>
+            <dt>Suíte 1</dt><dd>24 m² · cama king</dd>
+            <dt>Suíte 2</dt><dd>28 m² · cama queen + solteiro</dd>
+          </dl>
+          <p class="v2__copy">O Branco acomoda até cinco pessoas em dois ambientes. Espaço para a família viver junta sem abrir mão do silêncio.</p>
+          <a href="#" class="v2__cta">Ver bangalô família</a>
+        </div>
+      </div>
+
+      <div class="v2__panel" data-panel="fam7">
+        <div class="v2__img">Foto · família 7</div>
+        <div>
+          <h4 class="v2__name">Famílias <em>até 7</em></h4>
+          <div class="v2__colors">
+            <span class="v2__color-dot" style="background:#c8a9d4"></span>
+          </div>
+          <dl class="v2__meta">
+            <dt>Bangalô</dt><dd>Lilás</dd>
+            <dt>Capacidade</dt><dd>Até 7 pessoas</dd>
+            <dt>Suíte 1</dt><dd>35 m² · cama king</dd>
+            <dt>Suíte 2</dt><dd>55 m² · queen + 3 solteiros</dd>
+          </dl>
+          <p class="v2__copy">O Lilás é o maior, para grupos, famílias estendidas ou pequenos retiros. Sala ampla, dois quartos e varanda generosa.</p>
+          <a href="#" class="v2__cta">Ver bangalô grande</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== V3 ====== -->
+  <div class="lab-divider">
+    <span class="lab-divider__tag">Variação 3</span>
+    <h2>Bento assimétrico com hierarquia</h2>
+    <p>Casais ocupa metade do espaço (categoria mais procurada), as duas famílias dividem o resto. Sugere prioridade comercial sem esconder as outras.</p>
+  </div>
+
+  <section class="v3">
+    <div class="v3__inner">
+      <header class="v3__head">
+        <h3>Seu lar, <em>enquanto estiver conosco.</em></h3>
+        <p>Bangalôs privativos, projetados em arquitetura local, construídos com a experiência de quem entende a vila.</p>
+      </header>
+      <div class="v3__bento">
+        <a href="#" class="v3__cell v3__cell--main">
+          <div>
+            <span class="v3__tag">Para casais</span>
+            <h4 class="v3__cell-name">Três bangalôs <em>privativos</em></h4>
+            <p class="v3__cell-meta">3 unidades · cama king</p>
+            <p class="v3__cell-colors">Amarelo · Azul · Laranja</p>
+          </div>
+        </a>
+        <a href="#" class="v3__cell v3__cell--med">
+          <div>
+            <span class="v3__tag">Famílias até 5</span>
+            <h4 class="v3__cell-name">Bangalô <em>Branco</em></h4>
+            <p class="v3__cell-meta">Dois ambientes · king + queen/solteiro</p>
+          </div>
+        </a>
+        <a href="#" class="v3__cell v3__cell--big">
+          <div>
+            <span class="v3__tag">Famílias até 7</span>
+            <h4 class="v3__cell-name">Bangalô <em>Lilás</em></h4>
+            <p class="v3__cell-meta">Dois ambientes · king + queen/3 solteiros</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="lab-footer">
+    <p>Página de testes · <a href="v2.html">ver variações 4–6 (essência da vila)</a> · <a href="/">voltar à home</a></p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.v2__tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const id = tab.dataset.tab;
+        document.querySelectorAll('.v2__tab').forEach(t => t.classList.toggle('is-active', t === tab));
+        document.querySelectorAll('.v2__panel').forEach(p => p.classList.toggle('is-active', p.dataset.panel === id));
+      });
+    });
+  </script>
+
+</body>
+</html>

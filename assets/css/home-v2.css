@@ -1,0 +1,840 @@
+/* =====================================================
+   home-v2.css — overrides e novos componentes da v2
+   Carrega DEPOIS de main.css. Componentes novos:
+   .hero-video + .hero-sound (Ato 1), .apoio (Ato 2),
+   .tipologia (Ato 4), .prova (Ato 6),
+   .reservas__signature (Ato 8), .version-pill (toggle).
+   ===================================================== */
+
+/* =====================================================
+   ATO I — HERO · vídeo loop + toggle de áudio
+   Vídeo cobre o hero, atrás do conteúdo. .hero-water
+   (CSS animations) fica em z-index ainda mais baixo como
+   fallback se o vídeo falhar. Conteúdo (texto) z-index 2.
+   ===================================================== */
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  pointer-events: none;
+  /* Overlay sutil pra garantir contraste do texto sand sobre
+     vídeos que podem ter momentos muito claros (céu, água). */
+  filter: brightness(0.78) saturate(1.05);
+}
+/* Camada de escurecimento sobre o vídeo, pra texto respirar */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(31, 51, 40, 0.15) 0%,
+    rgba(31, 51, 40, 0.05) 40%,
+    rgba(31, 51, 40, 0.45) 100%
+  );
+  pointer-events: none;
+}
+
+/* Em prefers-reduced-motion: esconde o vídeo, mantém o fallback CSS */
+@media (prefers-reduced-motion: reduce) {
+  .hero-video { display: none; }
+}
+
+/* --- Toggle de som ambiente ----------------------------- */
+.hero-sound {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.55rem 0.95rem 0.55rem 0.7rem;
+  background: rgba(31, 51, 40, 0.45);
+  color: var(--sand);
+  border: 1px solid rgba(237, 227, 210, 0.25);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: lowercase;
+  font-weight: 400;
+  cursor: pointer;
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  opacity: 0;
+  animation: hero-sound-in 1.2s var(--ease) 2.8s forwards;
+  transition: background-color 320ms var(--ease), border-color 320ms var(--ease), transform 320ms var(--ease);
+}
+.hero-sound:hover {
+  background: rgba(31, 51, 40, 0.7);
+  border-color: rgba(237, 227, 210, 0.5);
+  transform: translateY(-1px);
+}
+@keyframes hero-sound-in {
+  to { opacity: 1; }
+}
+
+.hero-sound__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  color: var(--sand);
+  opacity: 0.85;
+}
+/* Ondas sonoras: invisíveis quando OFF, aparecem quando ON */
+.hero-sound__wave {
+  opacity: 0;
+  transition: opacity 320ms var(--ease);
+  stroke-linecap: round;
+}
+.hero-sound[aria-pressed="true"] .hero-sound__wave { opacity: 1; }
+.hero-sound[aria-pressed="true"] .hero-sound__wave--2 {
+  transition-delay: 80ms;
+}
+
+.hero-sound__label {
+  white-space: nowrap;
+  font-style: italic;
+}
+
+/* Quando o som está ON, o label troca via JS (data attribute), mas o
+   estilo do botão também muda sutilmente pra reforçar o estado. */
+.hero-sound[aria-pressed="true"] {
+  background: rgba(31, 51, 40, 0.65);
+  border-color: rgba(237, 227, 210, 0.4);
+}
+
+@media (max-width: 600px) {
+  .hero-sound {
+    bottom: 1rem;
+    left: 1rem;
+    padding: 0.45rem 0.8rem 0.45rem 0.6rem;
+    font-size: 0.62rem;
+  }
+}
+
+/* =====================================================
+   ATO II — DOBRA DE APOIO
+   Três colunas iguais, foto + caption overlay.
+   ===================================================== */
+
+.apoio-card {
+  padding: clamp(4rem, 8vw, 7rem) 0 clamp(5rem, 10vw, 8rem);
+  overflow: hidden;
+}
+.apoio__media {
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  overflow: hidden;
+  margin: 0 0 clamp(3rem, 6vw, 5rem);
+}
+.apoio__media img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+.apoio__copy {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+.apoio__eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 2.5rem;
+}
+.apoio__title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.875rem, 1.3rem + 2vw, 3.25rem);
+  line-height: 1.22;
+  color: var(--ink);
+  margin-bottom: 2.5rem;
+  letter-spacing: 0.005em;
+}
+.apoio__text {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: var(--ink-soft);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .apoio__media { aspect-ratio: 4 / 3; }
+}
+@media (min-width: 901px) {
+  .apoio-card { display: flex; flex-direction: column-reverse; }
+  .apoio__media { margin: clamp(3rem, 6vw, 5rem) 0 0; }
+}
+
+/* Títulos secundários de seção: menores que o .display padrão */
+.acomodacoes__head h2.display,
+#espacos h2.display,
+.prova h2.display,
+.reservas__inner h2.display {
+  font-size: clamp(1.875rem, 4vw, 3rem);
+}
+
+/* =====================================================
+   ATO IV — ACOMODAÇÕES
+   Intro card centralizado + 4 .tipologia full-bleed.
+   Cada tipologia é seu próprio .card no .stack — herda
+   o batimento de scale-down/overlap do template.
+   ===================================================== */
+
+.acomodacoes-intro {
+  padding: clamp(5rem, 10vw, 8rem) 0;
+  text-align: center;
+}
+.acomodacoes-intro .eyebrow { margin-bottom: 1.25rem; }
+.acomodacoes-intro h2 { margin-bottom: 1.25rem; }
+.acomodacoes-intro__lede {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.125rem, 1.8vw, 1.5rem);
+  color: var(--ink-soft);
+  max-width: 56ch;
+  margin: 0 auto;
+}
+
+.tipologia {
+  position: relative;
+  min-height: 92vh;
+  min-height: 92svh;
+  display: flex;
+  align-items: end;
+  padding: clamp(4rem, 8vw, 6rem) var(--gutter);
+  color: var(--sand);
+  background: var(--ink); /* fallback se o placeholder falhar */
+}
+.tipologia__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.tipologia__media .placeholder {
+  width: 100%; height: 100%;
+  border: none;
+  border-radius: 0;
+  aspect-ratio: auto;
+}
+.tipologia__media .placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 35%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  pointer-events: none;
+}
+.tipologia__media .placeholder__icon,
+.tipologia__media .placeholder__label,
+.tipologia__media .placeholder__spec { color: var(--sand); opacity: 0.85; }
+
+.tipologia__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+}
+.tipologia__content .eyebrow {
+  color: rgba(237, 227, 210, 0.7);
+  margin-bottom: 0.75rem;
+}
+.tipologia__name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.012em;
+  margin-bottom: 1rem;
+  color: var(--sand);
+  text-wrap: balance;
+  max-width: 18ch;
+}
+.tipologia__features {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-weight: 500;
+  opacity: 0.78;
+  margin-bottom: 1.5rem;
+}
+.tipologia__copy {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.125rem, 1.6vw, 1.4rem);
+  line-height: 1.55;
+  max-width: 50ch;
+  color: rgba(237, 227, 210, 0.92);
+}
+
+/* Placeholder por tipologia — paleta direta dos tokens da marca,
+   substituível por foto real assim que o cliente entregar */
+.tipologia--lagoa     .placeholder { background: linear-gradient(160deg, color-mix(in srgb, var(--blue) 70%, var(--green) 30%), color-mix(in srgb, var(--blue-deep) 88%, var(--green-deep) 12%)); }
+.tipologia--manha     .placeholder { background: linear-gradient(160deg, color-mix(in srgb, var(--terracotta) 60%, var(--green-deep) 40%), color-mix(in srgb, var(--green-deep) 80%, var(--terracotta) 20%)); }
+.tipologia--travessia .placeholder { background: linear-gradient(160deg, color-mix(in srgb, var(--ink) 78%, var(--blue) 22%), color-mix(in srgb, var(--green-deep) 70%, var(--blue-deep) 30%)); }
+
+@media (max-width: 700px) {
+  .tipologia { min-height: 78vh; min-height: 78svh; }
+  .tipologia__name { font-size: clamp(2rem, 8vw, 3rem); max-width: 16ch; }
+}
+
+/* =====================================================
+   ATO V — PRÉVIA DA GALERIA · OS ENTRES
+   Masonry reveal com overlay on hover.
+   ===================================================== */
+
+.entres-section { padding: clamp(5rem, 10vw, 8rem) 0 clamp(4rem, 8vw, 6rem); }
+.entres {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+.entres__head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: end;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+.entres__head .eyebrow { margin-bottom: 0.75rem; color: rgba(237, 227, 210, 0.55); }
+.entres__head h2 { margin: 0; color: var(--sand); }
+.entres__head-right { text-align: right; }
+.entres__head-right p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  color: rgba(237, 227, 210, 0.7);
+  max-width: 38ch;
+  margin-left: auto;
+  line-height: 1.6;
+}
+
+.entres__masonry {
+  columns: 3;
+  column-gap: clamp(0.75rem, 1.5vw, 1.25rem);
+}
+.entres__item {
+  break-inside: avoid;
+  margin: 0 0 clamp(0.75rem, 1.5vw, 1.25rem);
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+.entres__item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.entres__item img,
+.entres__item .placeholder {
+  width: 100%;
+  display: block;
+  transition: transform 0.6s var(--ease);
+}
+.entres__item .placeholder {
+  aspect-ratio: auto;
+  border: none;
+  border-radius: 0;
+  min-height: 180px;
+}
+.entres__item:nth-child(3n+1) .placeholder { min-height: 260px; }
+.entres__item:nth-child(3n+2) .placeholder { min-height: 200px; }
+.entres__item:nth-child(3n+3) .placeholder { min-height: 310px; }
+.entres__item:hover img,
+.entres__item:hover .placeholder { transform: scale(1.03); }
+
+.entres__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(31, 51, 40, 0.7) 100%);
+  display: flex;
+  align-items: flex-end;
+  padding: 1.25rem;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+}
+.entres__item:hover .entres__overlay { opacity: 1; }
+.entres__overlay span {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.05rem;
+  color: var(--sand);
+  line-height: 1.3;
+}
+
+.entres__cta {
+  text-align: center;
+  margin-top: clamp(3rem, 6vw, 5rem);
+}
+.entres__count {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(237, 227, 210, 0.5);
+  margin-bottom: 0.75rem;
+}
+.entres__divider {
+  width: 48px;
+  height: 1px;
+  background: var(--sand);
+  opacity: 0.25;
+  margin: 0 auto clamp(1.5rem, 3vw, 2.5rem);
+}
+.entres__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--sand);
+  text-decoration: none;
+  padding: 1rem 2.2rem;
+  border: 1px solid rgba(237, 227, 210, 0.35);
+  border-radius: 999px;
+  transition: background 0.35s var(--ease), border-color 0.35s var(--ease), transform 0.35s var(--ease);
+}
+.entres__btn:hover {
+  background: rgba(237, 227, 210, 0.1);
+  border-color: rgba(237, 227, 210, 0.6);
+  transform: translateY(-2px);
+}
+.entres__btn svg {
+  width: 14px; height: 14px;
+  transition: transform 0.35s var(--ease);
+}
+.entres__btn:hover svg { transform: translateX(3px); }
+
+@media (max-width: 900px) { .entres__masonry { columns: 2; } }
+@media (max-width: 700px) {
+  .entres__head { grid-template-columns: 1fr; gap: 1rem; }
+  .entres__head-right { text-align: left; }
+  .entres__head-right p { margin-left: 0; }
+}
+@media (max-width: 500px) {
+  .entres__masonry { column-gap: 6px; }
+  .entres__item { margin-bottom: 6px; border-radius: 2px; }
+}
+
+/* =====================================================
+   ATO VI — PROVA SOCIAL
+   Reveal estático sequencial (via [data-animate], main.js).
+   Sem carrossel — substância sobre movimento.
+   ===================================================== */
+
+.prova-section { padding: clamp(6rem, 12vw, 10rem) 0; }
+.prova {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  text-align: center;
+}
+.prova .eyebrow { margin-bottom: 1.25rem; }
+.prova h2 {
+  margin: 0 auto clamp(3rem, 6vw, 5rem);
+  max-width: 22ch;
+}
+/* --- Reviews carousel --- */
+.prova__carousel {
+  position: relative;
+  max-width: var(--container);
+  margin: 0 auto clamp(2.5rem, 5vw, 4rem);
+  overflow: hidden;
+}
+.prova__track {
+  display: flex;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.prova__slide {
+  flex: 0 0 33.333%;
+  text-align: center;
+  padding: 0 clamp(1rem, 2vw, 2rem);
+  opacity: 0.2;
+  transform: scale(0.85) translateY(8px);
+  filter: blur(1px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.prova__slide.is-active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  filter: blur(0);
+}
+@media (max-width: 800px) {
+  .prova__slide { flex: 0 0 100%; opacity: 0.35; transform: scale(0.9); }
+  .prova__slide.is-active { opacity: 1; transform: scale(1); }
+}
+.prova__score {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: var(--green-deep);
+  color: var(--sand);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+.prova__slide p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.125rem, 1.6vw, 1.375rem);
+  line-height: 1.6;
+  color: var(--ink);
+  margin-bottom: 1.25rem;
+  text-wrap: balance;
+}
+.prova__slide cite {
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--ink-soft);
+}
+.prova__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+.prova__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(42, 33, 24, 0.2);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.prova__arrow:hover {
+  background: var(--green-deep);
+  border-color: var(--green-deep);
+  color: var(--sand);
+}
+.prova__dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.prova__dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--ink);
+  opacity: 0.18;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity 0.3s var(--ease);
+}
+.prova__dot.is-active { opacity: 0.7; }
+.prova__press {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  text-align: center;
+}
+.prova__press-label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--ink-soft);
+  opacity: 0.5;
+  margin-bottom: 1.5rem;
+}
+.prova__press-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(2rem, 5vw, 4rem);
+  flex-wrap: wrap;
+}
+.prova__press-logos img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.75;
+  transition: opacity 0.4s var(--ease);
+}
+.prova__press-logos img:hover {
+  opacity: 1;
+}
+.prova__booking {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+}
+.prova__booking strong {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+/* =====================================================
+   ATO VIII — RESERVA · carta em papel
+   ===================================================== */
+
+.reservas__bg {
+  background: linear-gradient(170deg, #2e4a3a 0%, #1a2c22 100%) !important;
+}
+.reservas__bg::before {
+  background:
+    radial-gradient(ellipse at 25% 30%, rgba(149,176,128,0.25), transparent 60%),
+    radial-gradient(ellipse at 80% 75%, rgba(50,80,55,0.5), transparent 60%) !important;
+}
+.reservas__card {
+  background: linear-gradient(160deg, #e8e3d2 0%, #d8d2bd 100%);
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vw, 3.5rem);
+  box-shadow: 0 35px 80px -20px rgba(10,30,20,0.6), 0 0 0 1px rgba(70,80,55,0.1);
+  border-radius: 2px;
+  text-align: center;
+}
+.reservas__eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #4a5a3a;
+  margin-bottom: 1rem;
+}
+.reservas__card h2.display {
+  color: #2c3c2a !important;
+  margin-bottom: 2.5rem;
+}
+.reservas__card h2.display em { color: #5a6e3a !important; }
+.reservas__card .reservas__letter {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  line-height: 1.75;
+  color: #3a4530;
+  text-align: left;
+}
+.reservas__signature {
+  margin-top: 1.5rem !important;
+  font-family: 'Caveat', cursive;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.85rem;
+  color: #4a5a3a;
+}
+.reservas__card .btn-primary {
+  background: #2c3c2a;
+  color: #e8e3d2;
+  border-color: #2c3c2a;
+}
+.reservas__card .btn-secondary {
+  background: transparent;
+  border-color: #4a5a3a;
+  color: #4a5a3a;
+}
+.reservas__card .btn-secondary:hover {
+  background: #4a5a3a;
+  color: #e8e3d2;
+}
+
+/* =====================================================
+   TOGGLE V1 ↔ V2
+   Pílula fixa no canto inferior esquerdo, oposta ao
+   .wa-float (canto inferior direito). Permite alternar
+   entre as versões para comparação direta.
+   ===================================================== */
+
+.version-pill {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+  padding: 0.65rem 0.9rem;
+  background: rgba(31, 51, 40, 0.92);
+  color: var(--sand);
+  text-decoration: none;
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  transition: transform 320ms var(--ease), background-color 320ms var(--ease), box-shadow 320ms var(--ease);
+}
+.version-pill:hover {
+  transform: translateY(-2px);
+  background: rgba(31, 51, 40, 1);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.36);
+}
+.version-pill__label {
+  opacity: 0.55;
+  font-size: 0.55rem;
+  letter-spacing: 0.28em;
+}
+.version-pill__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+.version-pill__v { opacity: 0.5; }
+.version-pill__v--active {
+  opacity: 1;
+  font-weight: 600;
+}
+.version-pill__sep { opacity: 0.45; }
+
+@media (max-width: 600px) {
+  .version-pill {
+    bottom: auto;
+    top: calc(var(--header-h) + 0.5rem);
+    left: 0.75rem;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+/* =====================================================
+   ACOMODAÇÕES — grid 3 colunas
+   ===================================================== */
+.acomodacoes { padding: clamp(4rem, 8vw, 7rem) 0; }
+.acomodacoes__inner { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+.acomodacoes__head { text-align: center; max-width: 60ch; margin: 0 auto clamp(2.5rem, 5vw, 4rem); }
+.acomodacoes__head h2 { margin: 0 0 1rem; }
+.acomodacoes__lede { margin: 0; opacity: 0.75; font-size: 1rem; line-height: 1.6; }
+.acomodacoes__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.5rem); }
+
+.acomo-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px -16px rgba(0,0,0,0.18);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.acomo-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px -16px rgba(0,0,0,0.25); }
+.acomo-card__img { aspect-ratio: 4 / 3; overflow: hidden; }
+.acomo-card__img .placeholder { aspect-ratio: auto; height: 100%; border-radius: 0; }
+.acomo-card__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.acomo-card__body { padding: 1.5rem 1.5rem 1.75rem; flex: 1; display: flex; flex-direction: column; }
+.acomo-card__name { font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; margin: 0 0 0.6rem; line-height: 1.2; }
+.acomo-card__chips { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0 0 1rem; }
+.acomo-card__chip { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.32rem 0.6rem; border-radius: 999px; background: rgba(0,0,0,0.06); }
+.acomo-card__copy { font-size: 0.9rem; line-height: 1.55; opacity: 0.78; margin: 0 0 1.5rem; flex: 1; }
+.acomo-card__cta {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 3px;
+  align-self: flex-start;
+  transition: opacity 0.2s;
+}
+.acomo-card__cta:hover { opacity: 0.6; }
+
+@media (max-width: 900px) { .acomodacoes__grid { grid-template-columns: 1fr; } .acomo-card__img { aspect-ratio: 16 / 10; } }
+
+/* =====================================================
+   HOME GALLERY STRIPS
+   ===================================================== */
+
+.home-gallery-row {
+  position: relative;
+}
+.home-gallery-row::before,
+.home-gallery-row::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: clamp(2rem, 6vw, 6rem);
+  z-index: 2;
+  pointer-events: none;
+}
+.home-gallery-row::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--green-deep), transparent);
+}
+.home-gallery-row::after {
+  right: 0;
+  background: linear-gradient(90deg, transparent, var(--green-deep));
+}
+.home-gallery-strip {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 0 1rem;
+  padding-left: clamp(1.5rem, 6vw, 6rem);
+  scroll-padding-left: clamp(1.5rem, 6vw, 6rem);
+  cursor: grab;
+  scrollbar-width: none;
+}
+.home-gallery-strip::-webkit-scrollbar { display: none; }
+.home-gallery-strip:active { cursor: grabbing; }
+.home-gallery-strip .home-gallery-item:last-child { margin-right: clamp(2rem, 6vw, 6rem); }
+.home-gallery-item {
+  flex: 0 0 280px;
+  height: 200px;
+  scroll-snap-align: start;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.home-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 500ms var(--ease);
+}
+.home-gallery-item:hover img { transform: scale(1.05); }
+@media (max-width: 600px) {
+  .home-gallery-item { flex: 0 0 240px; height: 170px; }
+}
+
+/* =====================================================
+   REDUCED MOTION
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .tipologia__media .placeholder::before,
+  .tipologia__media .placeholder::after { animation: none; }
+}

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiencias, Pousada Lagoa Caraiva</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <style>
+    /* === V3, Magazine Alternating === */
+
+    .version-nav {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 200;
+      display: flex;
+      gap: 0.35rem;
+    }
+    .version-nav a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: rgba(31,51,40,0.7);
+      backdrop-filter: blur(8px);
+      color: var(--sand);
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 300ms var(--ease);
+    }
+    .version-nav a:hover,
+    .version-nav a.is-active {
+      background: var(--green);
+    }
+    .version-label {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      z-index: 200;
+      background: rgba(31,51,40,0.7);
+      backdrop-filter: blur(8px);
+      color: var(--sand);
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.75rem;
+      border-radius: 2rem;
+    }
+
+    /* Hero, split */
+    .hero-split {
+      display: grid;
+      grid-template-columns: 55% 45%;
+      min-height: 70vh;
+    }
+    @media (max-width: 768px) {
+      .hero-split {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+    }
+    .hero-split__img-wrap {
+      position: relative;
+      overflow: hidden;
+      min-height: 50vh;
+    }
+    .hero-split__img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero-split__content {
+      background: var(--green-deep);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(2.5rem, 5vw, 5rem) clamp(2rem, 4vw, 4rem);
+    }
+    .hero-split__eyebrow {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      color: var(--sand-light);
+      opacity: 0.7;
+      margin-bottom: 1.25rem;
+    }
+    .hero-split__title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: 1.05;
+      color: var(--sand);
+    }
+    .hero-split__title em {
+      font-style: italic;
+      font-weight: 300;
+    }
+    .hero-split__desc {
+      margin-top: 1.5rem;
+      font-size: clamp(1rem, 1.2vw, 1.1rem);
+      color: var(--sand-light);
+      opacity: 0.75;
+      max-width: 38ch;
+      line-height: 1.7;
+    }
+
+    /* Alternating rows */
+    .mag-section {
+      background: var(--paper);
+      border-radius: var(--card-radius) var(--card-radius) 0 0;
+      margin-top: calc(-1 * var(--card-overlap));
+      position: relative;
+      z-index: 2;
+      padding: clamp(3rem, 6vw, 5rem) 0;
+    }
+    .mag-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+      margin-bottom: clamp(2rem, 4vw, 3.5rem);
+      align-items: center;
+    }
+    .mag-row:last-child { margin-bottom: 0; }
+    @media (max-width: 768px) {
+      .mag-row { grid-template-columns: 1fr; }
+    }
+    .mag-row--reverse .mag-row__img-wrap {
+      order: 2;
+    }
+    .mag-row--reverse .mag-row__text {
+      order: 1;
+    }
+    @media (max-width: 768px) {
+      .mag-row--reverse .mag-row__img-wrap { order: 0; }
+      .mag-row--reverse .mag-row__text { order: 0; }
+    }
+    .mag-row__img-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+    .mag-row__img {
+      width: 100%;
+      aspect-ratio: 16/10;
+      object-fit: cover;
+      display: block;
+      transition: transform 600ms var(--ease);
+    }
+    .mag-row:hover .mag-row__img {
+      transform: scale(1.03);
+    }
+    .mag-row__text {
+      padding: clamp(1.5rem, 3vw, 3rem);
+    }
+    .mag-row__tag {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.75rem;
+    }
+    .mag-row__title {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      line-height: 1.15;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+    }
+    .mag-row__desc {
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      line-height: 1.7;
+      max-width: 42ch;
+    }
+
+    /* CTA */
+    .cta-section {
+      background: var(--green-deep);
+      padding: clamp(3rem, 6vw, 5rem) 0;
+      text-align: center;
+    }
+    .cta-section__title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--sand);
+      margin-bottom: 0.75rem;
+      line-height: 1.1;
+    }
+    .cta-section__sub {
+      color: var(--sand-light);
+      opacity: 0.8;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+    .btn-primary {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--green-deep);
+      background: var(--sand);
+      padding: 1rem 2.5rem;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 300ms var(--ease), transform 300ms var(--ease);
+    }
+    .btn-primary:hover {
+      background: #fff;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="version-label">V3, Magazine</div>
+  <nav class="version-nav">
+    <a href="v1.html">V1</a>
+    <a href="v2.html">V2</a>
+    <a href="v3.html" class="is-active">V3</a>
+    <a href="v4.html">V4</a>
+    <a href="v5.html">V5</a>
+  </nav>
+
+  <!-- Hero, split -->
+  <section class="hero-split">
+    <div class="hero-split__img-wrap">
+      <img src="/assets/img/yoga.jpg" alt="Yoga ao nascer do sol em Caraiva" class="hero-split__img" loading="lazy">
+    </div>
+    <div class="hero-split__content">
+      <p class="hero-split__eyebrow">Pousada Lagoa Caraiva</p>
+      <h1 class="hero-split__title">Dias que <em>valem</em> a viagem</h1>
+      <p class="hero-split__desc">Dentro e fora da pousada, cada experiencia nasce do lugar, e muda conforme o dia, a mare e a sua vontade.</p>
+    </div>
+  </section>
+
+  <!-- Alternating rows -->
+  <section class="mag-section">
+
+    <div class="mag-row">
+      <div class="mag-row__img-wrap">
+        <img src="/assets/img/yoga.jpg" alt="Yoga ao nascer do sol" class="mag-row__img" loading="lazy">
+      </div>
+      <div class="mag-row__text">
+        <p class="mag-row__tag">Bem-estar</p>
+        <h3 class="mag-row__title">Yoga ao nascer do sol</h3>
+        <p class="mag-row__desc">Comece o dia em silencio, com o sol surgindo no horizonte e a respiracao no compasso da mare.</p>
+      </div>
+    </div>
+
+    <div class="mag-row mag-row--reverse">
+      <div class="mag-row__img-wrap">
+        <img src="/assets/img/cafe-da-manha.jpg" alt="Cafe da manha a mesa" class="mag-row__img" loading="lazy">
+      </div>
+      <div class="mag-row__text">
+        <p class="mag-row__tag">Gastronomia</p>
+        <h3 class="mag-row__title">Cafe da manha a mesa</h3>
+        <p class="mag-row__desc">Frutas locais, paes frescos, geleias da casa e sucos prensados, servidos a sua mesa, no seu tempo.</p>
+      </div>
+    </div>
+
+    <div class="mag-row">
+      <div class="mag-row__img-wrap">
+        <img src="/assets/img/massagem.jpg" alt="Massagem em bangalo dedicado" class="mag-row__img" loading="lazy">
+      </div>
+      <div class="mag-row__text">
+        <p class="mag-row__tag">Bem-estar</p>
+        <h3 class="mag-row__title">Massagem em bangalo dedicado</h3>
+        <p class="mag-row__desc">Massagem terapêutica em espaço dedicado, opção tailandesa e outras técnicas relaxantes para você recarregar as energias.</p>
+      </div>
+    </div>
+
+    <div class="mag-row mag-row--reverse">
+      <div class="mag-row__img-wrap">
+        <img src="/assets/img/head-spa.jpg" alt="Head spa" class="mag-row__img" loading="lazy">
+      </div>
+      <div class="mag-row__text">
+        <p class="mag-row__tag">Bem-estar</p>
+        <h3 class="mag-row__title">Head spa</h3>
+        <p class="mag-row__desc">Ritual de relaxamento profundo no couro cabeludo, com oleos artesanais e o som da mata ao redor.</p>
+      </div>
+    </div>
+
+    <div class="mag-row">
+      <div class="mag-row__img-wrap">
+        <img src="/assets/img/caminhada-praia.jpg" alt="Caminhada ate a praia" class="mag-row__img" loading="lazy">
+      </div>
+      <div class="mag-row__text">
+        <p class="mag-row__tag">Natureza</p>
+        <h3 class="mag-row__title">Caminhada ate a praia</h3>
+        <p class="mag-row__desc">Apenas 400m da pousada a praia, entre a mata e a areia, o mar aparece no fim do caminho.</p>
+      </div>
+    </div>
+
+    <div class="mag-row mag-row--reverse">
+      <div class="mag-row__img-wrap">
+        <img src="/assets/img/canoa.jpg" alt="Canoa havaiana pelo rio" class="mag-row__img" loading="lazy">
+      </div>
+      <div class="mag-row__text">
+        <p class="mag-row__tag">Aventura</p>
+        <h3 class="mag-row__title">Canoa havaiana pelo rio</h3>
+        <p class="mag-row__desc">Reme em aguas calmas entre a vila e o mar, conduzido por quem conhece cada curva do rio Caraiva.</p>
+      </div>
+    </div>
+
+    <div class="mag-row">
+      <div class="mag-row__img-wrap">
+        <img src="/assets/img/etnoturismo.jpg" alt="Etnoturismo" class="mag-row__img" loading="lazy">
+      </div>
+      <div class="mag-row__text">
+        <p class="mag-row__tag">Cultura</p>
+        <h3 class="mag-row__title">Etnoturismo</h3>
+        <p class="mag-row__desc">Visita guiada a comunidade pataxo vizinha, artesanato, gastronomia ancestral e tradicao viva.</p>
+      </div>
+    </div>
+
+    <div class="mag-row mag-row--reverse">
+      <div class="mag-row__img-wrap">
+        <img src="/assets/img/parapente.jpg" alt="Parapente na Falesia do Satu" class="mag-row__img" loading="lazy">
+      </div>
+      <div class="mag-row__text">
+        <p class="mag-row__tag">Aventura</p>
+        <h3 class="mag-row__title">Parapente na Falesia do Satu</h3>
+        <p class="mag-row__desc">Voo duplo sobre as falesias coloridas, com vista da costa do descobrimento ate onde o horizonte alcanca.</p>
+      </div>
+    </div>
+
+    <div class="mag-row">
+      <div class="mag-row__img-wrap">
+        <img src="/assets/img/capoeira.jpg" alt="Capoeira na vila" class="mag-row__img" loading="lazy">
+      </div>
+      <div class="mag-row__text">
+        <p class="mag-row__tag">Cultura</p>
+        <h3 class="mag-row__title">Capoeira na vila</h3>
+        <p class="mag-row__desc">Roda aberta na areia, com mestres locais, ginga, berimbau e a alma da Bahia em movimento.</p>
+      </div>
+    </div>
+
+    <div class="mag-row mag-row--reverse">
+      <div class="mag-row__img-wrap">
+        <img src="/assets/img/curadoria.jpg" alt="Curadoria Local" class="mag-row__img" loading="lazy">
+      </div>
+      <div class="mag-row__text">
+        <p class="mag-row__tag">Hospitalidade</p>
+        <h3 class="mag-row__title">Curadoria Local</h3>
+        <p class="mag-row__desc">Nossa equipe indica passeios, aventuras, transfers e reservas, para voce so precisar viver Caraiva.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="cta-section__title">Escolha seus dias</h2>
+      <p class="cta-section__sub">Reserve e monte sua estadia do jeito que quiser.</p>
+      <a href="#" onclick="openBooking();return false" class="btn-primary">Reservar Agora</a>
+    </div>
+  </section>
+
+  <script>
+    </script>
+  <script src="/assets/js/widgets.js?v=2605312048" defer></script>
+</body>
+</html>

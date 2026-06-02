@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>V4, Carrossel estilo V1</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <style>
+    body{background:var(--paper);margin:0}
+
+    .var-tag{position:fixed;top:1rem;left:1rem;z-index:900;background:var(--green-deep);color:#fff;font:600 .75rem/1 'Inter',sans-serif;padding:.45rem .75rem;border-radius:4px;letter-spacing:.04em;text-transform:uppercase}
+
+    /* Hero tipográfico escuro */
+    .hero{background:var(--green-deep);color:var(--sand);padding:clamp(8rem,15vw,12rem) var(--gutter) clamp(4rem,8vw,6rem);text-align:center}
+    .hero .eyebrow{font-family:var(--font-body);font-size:.65rem;text-transform:uppercase;letter-spacing:.25em;color:rgba(237,227,210,.45);margin-bottom:1.25rem}
+    .hero h1{font-family:var(--font-display);font-weight:300;font-size:clamp(2.5rem,5vw,4.5rem);line-height:1.06;margin:0 0 1.25rem}
+    .hero h1 em{font-style:italic;font-weight:400}
+    .hero p{font-family:var(--font-display);font-style:italic;font-weight:300;font-size:clamp(1.05rem,1.5vw,1.3rem);color:rgba(237,227,210,.7);max-width:48ch;margin:0 auto}
+
+    /* Carrossel section */
+    .carousel-section{padding:clamp(3rem,6vw,5rem) 0;max-width:var(--container);margin:0 auto}
+    .carousel-header{display:flex;align-items:center;justify-content:space-between;padding:0 var(--gutter);margin-bottom:clamp(1.5rem,3vw,2.5rem)}
+    .carousel-header__counter{font-family:var(--font-body);font-size:.75rem;letter-spacing:.15em;color:var(--ink-soft)}
+    .carousel-header__counter span{color:var(--ink);font-weight:600}
+    .carousel-header__arrows{display:flex;gap:.5rem}
+    .carousel-header__arrows button{width:40px;height:40px;border-radius:50%;border:1px solid rgba(42,33,24,.2);background:transparent;color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s,color .3s}
+    .carousel-header__arrows button:hover{background:var(--green-deep);border-color:var(--green-deep);color:var(--sand)}
+
+    /* Track */
+    .carousel-track{display:flex;gap:clamp(.75rem,1.5vw,1.25rem);padding:0 var(--gutter);overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;cursor:grab}
+    .carousel-track::-webkit-scrollbar{display:none}
+    .carousel-track:active{cursor:grabbing}
+
+    /* Card */
+    .card-link{flex:0 0 clamp(260px,28vw,340px);scroll-snap-align:start;position:relative;overflow:hidden;border-radius:6px;aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;text-decoration:none;color:#fff;transition:transform .4s var(--ease)}
+    .card-link:hover{transform:translateY(-4px)}
+    .card-link img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+    .card-link:hover img{transform:scale(1.04)}
+    .card-link::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.65) 100%)}
+    .card-link__body{position:relative;z-index:2;padding:clamp(1.25rem,2vw,1.75rem)}
+    .card-link__name{font-family:var(--font-display);font-size:clamp(1.4rem,2vw,1.8rem);font-weight:400;margin:0 0 .35rem}
+    .card-link__meta{font-family:var(--font-body);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;opacity:.7}
+
+    /* Progress bar */
+    .carousel-progress{max-width:var(--container);margin:clamp(1.5rem,3vw,2rem) auto 0;padding:0 var(--gutter)}
+    .carousel-progress__track{width:100%;height:2px;background:rgba(42,33,24,.1);border-radius:1px;position:relative}
+    .carousel-progress__fill{position:absolute;left:0;top:0;height:100%;background:var(--green-deep);border-radius:1px;transition:width .3s var(--ease);width:20%}
+
+    @media(max-width:600px){
+      .card-link{flex:0 0 80vw}
+    }
+  </style>
+</head>
+<body>
+
+<span class="var-tag">V4, Carrossel</span>
+
+<div class="hero">
+  <p class="eyebrow">Acomodações</p>
+  <h1>Cinco cores, cinco <em>temperamentos.</em></h1>
+  <p>Arquitetura local com mais de 30 anos, em 7.000 m² de jardim tropical. Cada bangalô tem varanda, rede e banheiro privativo.</p>
+</div>
+
+<div class="carousel-section">
+  <div class="carousel-header">
+    <div class="carousel-header__counter"><span id="carousel-current">01</span> / 05</div>
+    <div class="carousel-header__arrows">
+      <button id="prev" aria-label="Anterior">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      </button>
+      <button id="next" aria-label="Próximo">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="carousel-track" id="track">
+    <a href="bangalo-amarelo.html" class="card-link">
+      <img src="/assets/amarelo/IMG_9708-2.jpg" alt="Bangalô Amarelo">
+      <div class="card-link__body">
+        <h3 class="card-link__name">Amarelo</h3>
+        <p class="card-link__meta">2 pessoas · Casal · 45 m²</p>
+      </div>
+    </a>
+    <a href="bangalo-laranja.html" class="card-link">
+      <img src="/assets/laranja/IMG_8919-2.jpg" alt="Bangalô Laranja">
+      <div class="card-link__body">
+        <h3 class="card-link__name">Laranja</h3>
+        <p class="card-link__meta">2 pessoas · Casal · 45 m²</p>
+      </div>
+    </a>
+    <a href="bangalo-azul.html" class="card-link">
+      <img src="/assets/azul/1-menino-na-rede.jpg" alt="Bangalô Azul">
+      <div class="card-link__body">
+        <h3 class="card-link__name">Azul</h3>
+        <p class="card-link__meta">2 pessoas · Casal · 45 m²</p>
+      </div>
+    </a>
+    <a href="bangalo-lilas.html" class="card-link">
+      <img src="/assets/lilás/IMG_8124-2.jpg" alt="Bangalô Lilás">
+      <div class="card-link__body">
+        <h3 class="card-link__name">Lilás</h3>
+        <p class="card-link__meta">Até 5 pessoas · Família · ~52 m²</p>
+      </div>
+    </a>
+    <a href="bangalo-branco.html" class="card-link">
+      <img src="/assets/branco/IMG_0140-2.jpg" alt="Bangalô Branco">
+      <div class="card-link__body">
+        <h3 class="card-link__name">Branco</h3>
+        <p class="card-link__meta">Até 7 pessoas · Grupo · ~90 m²</p>
+      </div>
+    </a>
+  </div>
+
+  <div class="carousel-progress">
+    <div class="carousel-progress__track">
+      <div class="carousel-progress__fill" id="progress-fill"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var track = document.getElementById('track');
+  var fill = document.getElementById('progress-fill');
+  var counter = document.getElementById('carousel-current');
+  var cards = track.querySelectorAll('.card-link');
+  var total = cards.length;
+
+  function getStep(){
+    var card = cards[0];
+    var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
+    return card.getBoundingClientRect().width + gap;
+  }
+
+  function update(){
+    var max = track.scrollWidth - track.clientWidth;
+    var ratio = max > 0 ? track.scrollLeft / max : 0;
+    fill.style.width = (Math.max(ratio, 0.05) * 100) + '%';
+    var idx = Math.min(Math.round(ratio * (total - 1)), total - 1) + 1;
+    counter.textContent = String(idx).padStart(2, '0');
+  }
+
+  track.addEventListener('scroll', update, {passive:true});
+  update();
+
+  document.getElementById('prev').addEventListener('click', function(){ track.scrollBy({left:-getStep(),behavior:'smooth'}); });
+  document.getElementById('next').addEventListener('click', function(){ track.scrollBy({left:getStep(),behavior:'smooth'}); });
+
+  var isDown=false, startX=0, startScroll=0;
+  track.addEventListener('pointerdown', function(e){ isDown=true; startX=e.clientX; startScroll=track.scrollLeft; track.setPointerCapture(e.pointerId); });
+  track.addEventListener('pointermove', function(e){ if(!isDown) return; track.scrollLeft = startScroll - (e.clientX - startX); });
+  track.addEventListener('pointerup', function(){ isDown=false; });
+  track.addEventListener('pointercancel', function(){ isDown=false; });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Contato, Pousada Lagoa Caraíva</title>
+  <meta name="description" content="Fale com a gente: WhatsApp, e-mail, formulário, ou venha em pessoa.">
+  <meta name="theme-color" content="#1F3328">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <style>
+    .contact-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(2rem, 5vw, 5rem); max-width: var(--container); margin: 0 auto; padding: clamp(4rem, 8vw, 7rem) var(--gutter); }
+    @media (max-width: 800px) { .contact-grid { grid-template-columns: 1fr; } }
+    .contact-channels { display: flex; flex-direction: column; gap: 1.5rem; padding: 2rem; background: var(--sand-light); border-radius: 4px; }
+    .contact-channels h3 { font-family: var(--font-display); font-weight: 400; font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .contact-channels a { color: var(--green); text-decoration: none; border-bottom: 1px solid currentColor; }
+    .map-embed { aspect-ratio: 16/9; margin: 2rem auto 0; max-width: var(--container); padding: 0 var(--gutter) clamp(4rem, 8vw, 7rem); }
+    .map-embed .placeholder { aspect-ratio: 16/9; }
+    .form-success { background: color-mix(in srgb, var(--green) 12%, var(--paper)); padding: 1.25rem; border-radius: 4px; margin-top: 1rem; display: none; color: var(--green-deep); }
+    .form-success.is-shown { display: block; }
+  </style>
+  <!-- GTM -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TS2X8Z5L');</script>
+</head>
+<body>
+  <!-- GTM noscript -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TS2X8Z5L" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <header class="header">
+    <div class="header__inner">
+      <a class="logo" href="../index.html"><span class="logo__mark">~</span><span class="logo__text">Lagoa Caraíva</span></a>
+      <nav class="nav">
+        <a href="../a-vila/index.html">A vila</a>
+        <a href="../a-pousada/index.html">A pousada</a>
+        <a href="../os-bangalos/index.html">Bangalôs</a>
+        <a href="../experiencias/index.html">Bem-estar</a>
+        <a href="../casamentos/index.html">Casamentos</a>
+        <a href="../galeria/index.html">Galeria</a>
+        <a href="../contato/index.html" aria-current="page">Contato</a>
+      </nav>
+      <div class="header__cta">
+        <button class="lang" type="button" title="EN coming in v2">PT</button>
+        <a href="#" class="btn-primary btn-sm" onclick="openBooking();return false">Reservar</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="stack">
+
+    <section class="card page-hero">
+      <div class="page-hero__bg" aria-hidden="true">
+        <div class="placeholder">
+          <div class="placeholder__inner">
+            <span class="placeholder__icon">📷</span>
+            <span class="placeholder__label">A Herminia conversando com hóspedes na varanda da recepção, luz da tarde</span>
+            <span class="placeholder__spec">full-bleed · documental · luz quente</span>
+          </div>
+        </div>
+      </div>
+      <div class="page-hero__inner" data-animate>
+        <nav class="breadcrumb"><a href="../index.html">Início</a><span>·</span><span>Contato</span></nav>
+        <p class="eyebrow">Contato</p>
+        <h1 class="display">Falar com <em>a gente.</em></h1>
+        <p class="lede">A Herminia ou alguém da família responde, costuma ser rápido.</p>
+      </div>
+    </section>
+
+    <section class="card card--paper">
+      <div class="contact-grid">
+        <form class="lc-form" data-form="contato" data-animate>
+          <p class="eyebrow" style="margin-bottom: 0.5rem;">Mande uma mensagem</p>
+          <h2 class="display" style="font-size: clamp(1.75rem, 3vw, 2.5rem); margin-bottom: 1.5rem;">A gente responde <em>quando dá pé.</em></h2>
+
+          <div class="form-row">
+            <label>Nome <input type="text" name="nome" required autocomplete="name"></label>
+            <label>Telefone <input type="tel" name="telefone" autocomplete="tel"></label>
+          </div>
+          <label>E-mail <input type="email" name="email" required autocomplete="email"></label>
+          <label>Mensagem <textarea name="mensagem" required></textarea></label>
+          <button type="submit" class="btn-primary">Enviar</button>
+
+          <div class="form-success" data-success>
+            Mensagem recebida. A gente responde no e-mail ou WhatsApp em pouco tempo.
+          </div>
+        </form>
+
+        <aside class="contact-channels" data-animate style="--delay:160ms">
+          <div>
+            <h3>WhatsApp</h3>
+            <p><a href="https://wa.me/557399856862">[TODO: número formatado]</a></p>
+          </div>
+          <div>
+            <h3>E-mail</h3>
+            <p><a href="mailto:contato@lagoacaraiva.com.br">contato@lagoacaraiva.com.br</a></p>
+          </div>
+          <div>
+            <h3>Instagram</h3>
+            <p><a href="https://www.instagram.com/lagoacaraiva/">@lagoacaraiva</a></p>
+          </div>
+          <div>
+            <h3>Reservas direto</h3>
+            <p><a href="#" onclick="openBooking();return false">Verificar disponibilidade</a></p>
+          </div>
+          <div>
+            <h3>Endereço</h3>
+            <p>Rua da Lagoa, 1900<br>Caraíva, Porto Seguro, Bahia<br>[TODO: CEP]</p>
+          </div>
+        </aside>
+      </div>
+
+      <div class="map-embed" data-animate>
+        <div class="placeholder">
+          <div class="placeholder__inner">
+            <span class="placeholder__icon">🗺️</span>
+            <span class="placeholder__label">Iframe Google Maps consultando por nome do negócio (não endereço): "Pousada Lagoa Caraíva"</span>
+            <span class="placeholder__spec">16:9 · iframe · query="Pousada+Lagoa+Caraíva"</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__col footer__col--brand">
+        <span class="logo logo--footer"><span class="logo__mark">~</span><span class="logo__text">Lagoa Caraíva</span></span>
+        <p>Lagoa Caraíva, onde o tempo passa no ritmo da maré, viva a magia da travessia.</p>
+      </div>
+      <div class="footer__col"><h4>Endereço</h4><p>[TODO: endereço]<br>Caraíva, Porto Seguro, Bahia</p></div>
+      <div class="footer__col"><h4>Contato</h4><p><a href="https://wa.me/557399856862">WhatsApp</a><br><a href="mailto:contato@lagoacaraiva.com.br">contato@lagoacaraiva.com.br</a><br><a href="https://www.instagram.com/lagoacaraiva/">@lagoacaraiva</a></p></div>
+      <div class="footer__col"><h4>Reservas</h4><p><a href="#" onclick="openBooking();return false">Verificar disponibilidade</a><br><a href="../casamentos/index.html">Casamentos e eventos</a></p></div>
+    </div>
+    <div class="footer__base"><small>© 2026 Pousada Lagoa Caraíva · CNPJ 10.650.995/0001-90</small><small>site por <a href="#">Komplexa Hotéis</a></small></div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="/assets/js/widgets.js?v=2605312048" defer></script>
+</body>
+</html>

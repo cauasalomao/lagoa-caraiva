@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trio Casamentos, V2 · Feature + dupla</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css?v=20260525">
+  <style>
+    body{background:var(--paper);margin:0;padding:2rem 0}
+    .label{text-align:center;font-family:var(--font-body);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:2rem}
+
+    .photo-trio{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(.5rem,1vw,.75rem);max-width:1200px;margin:0 auto;padding:0 var(--gutter)}
+    .photo-trio__item{overflow:hidden;border-radius:4px;aspect-ratio:3/4}
+    .photo-trio__item img{width:100%;height:100%;object-fit:cover;display:block}
+
+    @media(max-width:700px){
+      .photo-trio{
+        grid-template-columns:1fr 1fr;
+        grid-template-rows:auto auto;
+        gap:.6rem;
+      }
+      .photo-trio__item:first-child{
+        grid-column:span 2;
+        aspect-ratio:16/10;
+      }
+      .photo-trio__item{aspect-ratio:1/1}
+    }
+  </style>
+</head>
+<body>
+  <p class="label">V2 · feature grande + dupla embaixo</p>
+  <div class="photo-trio">
+    <div class="photo-trio__item"><img src="../assets/img/evento-decor1.jpg" alt=""></div>
+    <div class="photo-trio__item"><img src="../assets/img/evento-decor3.jpg" alt=""></div>
+    <div class="photo-trio__item"><img src="../assets/img/evento-decor2.jpg" alt=""></div>
+  </div>
+</body>
+</html>

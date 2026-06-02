@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Transição V3, Texto entre as dobras</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <style>
+    body{background:#25455A;color:#fff;margin:0}
+
+    .var-tag{position:fixed;top:1rem;left:1rem;z-index:900;background:#1a3a4d;color:#fff;font:600 .75rem/1 'Inter',sans-serif;padding:.45rem .75rem;border-radius:4px;letter-spacing:.04em;text-transform:uppercase}
+    .var-nav{position:fixed;top:1rem;right:1rem;z-index:900;display:flex;gap:.35rem}
+    .var-nav a{background:#1a3a4d;color:#fff;font:600 .7rem/1 'Inter',sans-serif;padding:.45rem .65rem;border-radius:4px;text-decoration:none;letter-spacing:.03em;opacity:.55;transition:opacity .2s}
+    .var-nav a:hover,.var-nav a.is-active{opacity:1}
+
+    /* Hero split */
+    .hero-split{display:flex;height:100vh}
+    .hero-split__photo{flex:0 0 58%;position:relative;overflow:hidden}
+    .hero-split__photo img{width:100%;height:100%;object-fit:cover;display:block}
+    .hero-split__info{flex:1;background:#25455A;display:flex;flex-direction:column;justify-content:center;padding:3.5rem 2.5rem}
+    .hero-split__eyebrow{font:500 .7rem/1 'Inter',sans-serif;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,255,255,.5);margin-bottom:.75rem}
+    .hero-split__title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(2.2rem,4vw,3.6rem);line-height:1.08}
+    .hero-split__title em{font-style:italic;font-weight:400;color:#5a9ab5}
+    .hero-split__desc{font-family:'Cormorant Garamond',serif;font-size:1.15rem;line-height:1.65;color:rgba(255,255,255,.85);margin-top:1.5rem}
+    .hero-split__chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.5rem}
+    .hero-split__chip{background:rgba(255,255,255,.1);color:#fff;font:500 .72rem/1.2 'Inter',sans-serif;padding:.38rem .8rem;border-radius:18px;border:1px solid rgba(255,255,255,.15)}
+    .hero-split__btn{margin-top:2rem}
+
+    /* V3: Editorial bridge, texto editorial entre hero e feature photo */
+    .bridge{
+      max-width:760px;
+      margin:0 auto;
+      padding:clamp(3rem,6vw,5rem) var(--gutter,1.5rem);
+      text-align:center;
+    }
+    .bridge__eyebrow{font:500 .65rem/1 'Inter',sans-serif;text-transform:uppercase;letter-spacing:.25em;color:rgba(255,255,255,.45);margin-bottom:1rem}
+    .bridge__title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(1.6rem,2.5vw,2.4rem);line-height:1.2;margin-bottom:1.25rem}
+    .bridge__title em{font-style:italic;font-weight:300;color:#5a9ab5}
+    .bridge__text{font-family:'Cormorant Garamond',serif;font-size:1.1rem;line-height:1.7;color:rgba(255,255,255,.82);max-width:580px;margin:0 auto}
+
+    .feature-photo{
+      position:relative;overflow:hidden;aspect-ratio:21/9;
+    }
+    .feature-photo img{width:100%;height:100%;object-fit:cover;display:block}
+    .feature-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.5) 100%)}
+    .feature-photo__caption{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:1.5rem 2rem;color:#fff;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(1.1rem,1.5vw,1.6rem);text-shadow:0 2px 12px rgba(0,0,0,.4)}
+
+    /* Continued editorial */
+    .editorial{max-width:760px;margin:0 auto;padding:clamp(3rem,7vw,5rem) 1.5rem}
+    .editorial__text{font-family:'Cormorant Garamond',serif;font-size:1.1rem;line-height:1.7;color:rgba(255,255,255,.88);margin-bottom:1.25em}
+
+    @media(max-width:800px){
+      .hero-split{flex-direction:column;height:auto}
+      .hero-split__photo{height:55vh;min-height:350px}
+      .feature-photo{aspect-ratio:16/9}
+    }
+  </style>
+</head>
+<body>
+
+<span class="var-tag">V3, Bridge</span>
+<nav class="var-nav">
+  <a href="v1.html">V1</a>
+  <a href="v2.html">V2</a>
+  <a href="v3.html" class="is-active">V3</a>
+</nav>
+
+<section class="hero-split">
+  <div class="hero-split__photo">
+    <img src="../assets/azul/1-menino-na-rede.jpg" alt="Varanda do Bangalô Azul">
+  </div>
+  <div class="hero-split__info">
+    <p class="hero-split__eyebrow">Pousada Lagoa Caraíva</p>
+    <h1 class="hero-split__title">Bangalô <em>Azul</em></h1>
+    <p class="hero-split__desc">Na ponta do terreno, onde o jardim encontra a lagoa de vitórias-régias. Varanda com rede, vista direta para a água e o silêncio que só existe longe de tudo.</p>
+    <div class="hero-split__chips">
+      <span class="hero-split__chip">Cama casal</span>
+      <span class="hero-split__chip">Varanda com rede</span>
+      <span class="hero-split__chip">Ar-condicionado</span>
+      <span class="hero-split__chip">Ducha quente</span>
+      <span class="hero-split__chip">Café incluso</span>
+    </div>
+    <div class="hero-split__btn">
+      <a href="#" class="btn-primary" onclick="return false">Reservar este bangalô</a>
+    </div>
+  </div>
+</section>
+
+<div class="bridge">
+  <p class="bridge__eyebrow">O espaço</p>
+  <h2 class="bridge__title">Um quarto com alma <em>própria.</em></h2>
+  <p class="bridge__text">As janelas pintadas em tom de rio. Da varanda, a lagoa aparece inteira: as vitórias-régias flutuando, o espelho d'água que muda de cor conforme o céu decide.</p>
+</div>
+
+<div class="feature-photo">
+  <img src="../assets/azul/2-cama.jpg" alt="Cama do Bangalô Azul">
+  <p class="feature-photo__caption">Projetado para um repouso excepcional, capaz de recarregar suas energias.</p>
+</div>
+
+<div class="editorial">
+  <p class="editorial__text">A estrutura é simples e honesta: cama de madeira maciça com mosquiteiro, chuveiro quente, ventilação cruzada e ar-condicionado para os dias mais quentes. Não tem televisão, tem janela. Não tem relógio, tem o sol.</p>
+</div>
+
+</body>
+</html>

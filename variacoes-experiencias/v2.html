@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiencias, Pousada Lagoa Caraiva</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <style>
+    /* === V2, Horizontal Scroll Categories === */
+
+    .version-nav {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 200;
+      display: flex;
+      gap: 0.35rem;
+    }
+    .version-nav a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: rgba(31,51,40,0.7);
+      backdrop-filter: blur(8px);
+      color: var(--sand);
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 300ms var(--ease);
+    }
+    .version-nav a:hover,
+    .version-nav a.is-active {
+      background: var(--green);
+    }
+    .version-label {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      z-index: 200;
+      background: rgba(31,51,40,0.7);
+      backdrop-filter: blur(8px);
+      color: var(--sand);
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.75rem;
+      border-radius: 2rem;
+    }
+
+    /* Hero, typographic, no photo */
+    .hero-typo {
+      background: var(--green-deep);
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: clamp(4rem, 10vw, 8rem) var(--gutter);
+    }
+    .hero-typo__eyebrow {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      color: var(--sand-light);
+      opacity: 0.7;
+      margin-bottom: 1.25rem;
+    }
+    .hero-typo__title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 1.02;
+      color: var(--sand);
+    }
+    .hero-typo__title em {
+      font-style: italic;
+      font-weight: 300;
+    }
+    .hero-typo__sub {
+      margin-top: 1.5rem;
+      font-size: clamp(1rem, 1.3vw, 1.15rem);
+      color: var(--sand-light);
+      opacity: 0.7;
+      max-width: 42ch;
+    }
+
+    /* Category pills */
+    .categories-bar {
+      background: var(--paper);
+      border-radius: var(--card-radius) var(--card-radius) 0 0;
+      margin-top: calc(-1 * var(--card-overlap));
+      position: relative;
+      z-index: 2;
+      padding: 2.5rem 0 0;
+    }
+    .cat-pills {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0 var(--gutter);
+      max-width: var(--container);
+      margin: 0 auto;
+    }
+    .cat-pill {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.25rem;
+      border-radius: 2rem;
+      border: 1.5px solid var(--green);
+      color: var(--green);
+      background: transparent;
+      cursor: pointer;
+      transition: all 300ms var(--ease);
+    }
+    .cat-pill:hover,
+    .cat-pill.is-active {
+      background: var(--green-deep);
+      color: var(--sand);
+      border-color: var(--green-deep);
+    }
+
+    /* Carousel section */
+    .carousel-section {
+      background: var(--paper);
+      padding: 2.5rem 0 clamp(3rem, 6vw, 5rem);
+      position: relative;
+    }
+    .carousel-wrap {
+      position: relative;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+    .carousel-track {
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      padding: 1rem 0 1.5rem;
+      cursor: grab;
+      scrollbar-width: none;
+    }
+    .carousel-track::-webkit-scrollbar { display: none; }
+    .carousel-track.is-dragging { cursor: grabbing; scroll-snap-type: none; }
+
+    .carousel-card {
+      flex: 0 0 320px;
+      scroll-snap-align: start;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 2px 16px rgba(42,33,24,0.06);
+      transition: transform 400ms var(--ease);
+    }
+    .carousel-card:hover {
+      transform: translateY(-4px);
+    }
+    .carousel-card[hidden] { display: none; }
+    .carousel-card__img-wrap {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+    }
+    .carousel-card__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 600ms var(--ease);
+    }
+    .carousel-card:hover .carousel-card__img {
+      transform: scale(1.04);
+    }
+    .carousel-card__tag {
+      position: absolute;
+      bottom: 0.75rem;
+      left: 0.75rem;
+      font-family: var(--font-body);
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #fff;
+      background: rgba(31,51,40,0.75);
+      backdrop-filter: blur(6px);
+      padding: 0.25rem 0.55rem;
+      border-radius: 2rem;
+    }
+    .carousel-card__body {
+      padding: 1.15rem 1.15rem 1.35rem;
+    }
+    .carousel-card__title {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 1.25rem;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+    }
+    .carousel-card__desc {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+
+    /* Arrows */
+    .carousel-arrows {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+    .carousel-arrow {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      border: 1.5px solid var(--green);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 300ms var(--ease);
+      color: var(--green);
+    }
+    .carousel-arrow:hover {
+      background: var(--green-deep);
+      border-color: var(--green-deep);
+      color: var(--sand);
+    }
+    .carousel-arrow svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* CTA */
+    .cta-section {
+      background: var(--green-deep);
+      padding: clamp(3rem, 6vw, 5rem) 0;
+      text-align: center;
+    }
+    .cta-section__title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--sand);
+      margin-bottom: 0.75rem;
+      line-height: 1.1;
+    }
+    .cta-section__sub {
+      color: var(--sand-light);
+      opacity: 0.8;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+    .btn-primary {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--green-deep);
+      background: var(--sand);
+      padding: 1rem 2.5rem;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 300ms var(--ease), transform 300ms var(--ease);
+    }
+    .btn-primary:hover {
+      background: #fff;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="version-label">V2, Horizontal Scroll</div>
+  <nav class="version-nav">
+    <a href="v1.html">V1</a>
+    <a href="v2.html" class="is-active">V2</a>
+    <a href="v3.html">V3</a>
+    <a href="v4.html">V4</a>
+    <a href="v5.html">V5</a>
+  </nav>
+
+  <!-- Hero, typographic -->
+  <section class="hero-typo">
+    <p class="hero-typo__eyebrow">Pousada Lagoa Caraiva</p>
+    <h1 class="hero-typo__title">Experiencias que <em>ficam</em></h1>
+    <p class="hero-typo__sub">De dentro da pousada ate o horizonte, cada vivencia e parte do lugar.</p>
+  </section>
+
+  <!-- Categories + Carousel -->
+  <section class="categories-bar">
+    <div class="cat-pills">
+      <button class="cat-pill is-active" data-cat="all">Todas</button>
+      <button class="cat-pill" data-cat="bem-estar">Bem-estar</button>
+      <button class="cat-pill" data-cat="gastronomia">Gastronomia</button>
+      <button class="cat-pill" data-cat="natureza">Natureza</button>
+      <button class="cat-pill" data-cat="aventura">Aventura</button>
+      <button class="cat-pill" data-cat="cultura">Cultura</button>
+      <button class="cat-pill" data-cat="hospitalidade">Hospitalidade</button>
+    </div>
+  </section>
+
+  <section class="carousel-section">
+    <div class="carousel-wrap">
+      <div class="carousel-track" id="carouselTrack">
+
+        <article class="carousel-card" data-cat="bem-estar">
+          <div class="carousel-card__img-wrap">
+            <img src="/assets/img/yoga.jpg" alt="Yoga ao nascer do sol" class="carousel-card__img" loading="lazy">
+            <span class="carousel-card__tag">Bem-estar</span>
+          </div>
+          <div class="carousel-card__body">
+            <h3 class="carousel-card__title">Yoga ao nascer do sol</h3>
+            <p class="carousel-card__desc">Comece o dia em silencio, com o sol surgindo no horizonte e a respiracao no compasso da mare.</p>
+          </div>
+        </article>
+
+        <article class="carousel-card" data-cat="gastronomia">
+          <div class="carousel-card__img-wrap">
+            <img src="/assets/img/cafe-da-manha.jpg" alt="Cafe da manha a mesa" class="carousel-card__img" loading="lazy">
+            <span class="carousel-card__tag">Gastronomia</span>
+          </div>
+          <div class="carousel-card__body">
+            <h3 class="carousel-card__title">Cafe da manha a mesa</h3>
+            <p class="carousel-card__desc">Frutas locais, paes frescos, geleias da casa e sucos prensados, servidos a sua mesa, no seu tempo.</p>
+          </div>
+        </article>
+
+        <article class="carousel-card" data-cat="bem-estar">
+          <div class="carousel-card__img-wrap">
+            <img src="/assets/img/massagem.jpg" alt="Massagem em bangalo dedicado" class="carousel-card__img" loading="lazy">
+            <span class="carousel-card__tag">Bem-estar</span>
+          </div>
+          <div class="carousel-card__body">
+            <h3 class="carousel-card__title">Massagem em bangalo dedicado</h3>
+            <p class="carousel-card__desc">Massagem terapêutica em espaço dedicado, opção tailandesa e outras técnicas relaxantes para você recarregar as energias.</p>
+          </div>
+        </article>
+
+        <article class="carousel-card" data-cat="bem-estar">
+          <div class="carousel-card__img-wrap">
+            <img src="/assets/img/head-spa.jpg" alt="Head spa" class="carousel-card__img" loading="lazy">
+            <span class="carousel-card__tag">Bem-estar</span>
+          </div>
+          <div class="carousel-card__body">
+            <h3 class="carousel-card__title">Head spa</h3>
+            <p class="carousel-card__desc">Ritual de relaxamento profundo no couro cabeludo, com oleos artesanais e o som da mata ao redor.</p>
+          </div>
+        </article>
+
+        <article class="carousel-card" data-cat="natureza">
+          <div class="carousel-card__img-wrap">
+            <img src="/assets/img/caminhada-praia.jpg" alt="Caminhada ate a praia" class="carousel-card__img" loading="lazy">
+            <span class="carousel-card__tag">Natureza</span>
+          </div>
+          <div class="carousel-card__body">
+            <h3 class="carousel-card__title">Caminhada ate a praia</h3>
+            <p class="carousel-card__desc">Apenas 400m da pousada a praia, entre a mata e a areia, o mar aparece no fim do caminho.</p>
+          </div>
+        </article>
+
+        <article class="carousel-card" data-cat="aventura">
+          <div class="carousel-card__img-wrap">
+            <img src="/assets/img/canoa.jpg" alt="Canoa havaiana pelo rio" class="carousel-card__img" loading="lazy">
+            <span class="carousel-card__tag">Aventura</span>
+          </div>
+          <div class="carousel-card__body">
+            <h3 class="carousel-card__title">Canoa havaiana pelo rio</h3>
+            <p class="carousel-card__desc">Reme em aguas calmas entre a vila e o mar, conduzido por quem conhece cada curva do rio Caraiva.</p>
+          </div>
+        </article>
+
+        <article class="carousel-card" data-cat="cultura">
+          <div class="carousel-card__img-wrap">
+            <img src="/assets/img/etnoturismo.jpg" alt="Etnoturismo" class="carousel-card__img" loading="lazy">
+            <span class="carousel-card__tag">Cultura</span>
+          </div>
+          <div class="carousel-card__body">
+            <h3 class="carousel-card__title">Etnoturismo</h3>
+            <p class="carousel-card__desc">Visita guiada a comunidade pataxo vizinha, artesanato, gastronomia ancestral e tradicao viva.</p>
+          </div>
+        </article>
+
+        <article class="carousel-card" data-cat="aventura">
+          <div class="carousel-card__img-wrap">
+            <img src="/assets/img/parapente.jpg" alt="Parapente na Falesia do Satu" class="carousel-card__img" loading="lazy">
+            <span class="carousel-card__tag">Aventura</span>
+          </div>
+          <div class="carousel-card__body">
+            <h3 class="carousel-card__title">Parapente na Falesia do Satu</h3>
+            <p class="carousel-card__desc">Voo duplo sobre as falesias coloridas, com vista da costa do descobrimento ate onde o horizonte alcanca.</p>
+          </div>
+        </article>
+
+        <article class="carousel-card" data-cat="cultura">
+          <div class="carousel-card__img-wrap">
+            <img src="/assets/img/capoeira.jpg" alt="Capoeira na vila" class="carousel-card__img" loading="lazy">
+            <span class="carousel-card__tag">Cultura</span>
+          </div>
+          <div class="carousel-card__body">
+            <h3 class="carousel-card__title">Capoeira na vila</h3>
+            <p class="carousel-card__desc">Roda aberta na areia, com mestres locais, ginga, berimbau e a alma da Bahia em movimento.</p>
+          </div>
+        </article>
+
+        <article class="carousel-card" data-cat="hospitalidade">
+          <div class="carousel-card__img-wrap">
+            <img src="/assets/img/curadoria.jpg" alt="Curadoria Local" class="carousel-card__img" loading="lazy">
+            <span class="carousel-card__tag">Hospitalidade</span>
+          </div>
+          <div class="carousel-card__body">
+            <h3 class="carousel-card__title">Curadoria Local</h3>
+            <p class="carousel-card__desc">Nossa equipe indica passeios, aventuras, transfers e reservas, para voce so precisar viver Caraiva.</p>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="carousel-arrows">
+        <button class="carousel-arrow" id="arrowLeft" aria-label="Anterior">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <button class="carousel-arrow" id="arrowRight" aria-label="Proximo">
+          <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"></polyline></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="cta-section__title">Viva Caraiva por inteiro</h2>
+      <p class="cta-section__sub">Reserve e deixe o resto com a gente.</p>
+      <a href="#" onclick="openBooking();return false" class="btn-primary">Reservar Agora</a>
+    </div>
+  </section>
+
+  <script>
+    /* Category filter */
+    const pills = document.querySelectorAll('.cat-pill');
+    const cards = document.querySelectorAll('.carousel-card');
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('is-active'));
+        pill.classList.add('is-active');
+        const cat = pill.dataset.cat;
+        cards.forEach(card => {
+          if (cat === 'all' || card.dataset.cat === cat) {
+            card.hidden = false;
+          } else {
+            card.hidden = true;
+          }
+        });
+      });
+    });
+
+    /* Arrows */
+    const track = document.getElementById('carouselTrack');
+    document.getElementById('arrowLeft').addEventListener('click', () => {
+      track.scrollBy({ left: -340, behavior: 'smooth' });
+    });
+    document.getElementById('arrowRight').addEventListener('click', () => {
+      track.scrollBy({ left: 340, behavior: 'smooth' });
+    });
+
+    /* Drag to scroll */
+    let isDown = false, startX, scrollLeft;
+    track.addEventListener('mousedown', (e) => {
+      isDown = true;
+      track.classList.add('is-dragging');
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+    });
+    track.addEventListener('mouseleave', () => { isDown = false; track.classList.remove('is-dragging'); });
+    track.addEventListener('mouseup', () => { isDown = false; track.classList.remove('is-dragging'); });
+    track.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - track.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      track.scrollLeft = scrollLeft - walk;
+    });
+  </script>
+  <script src="/assets/js/widgets.js?v=2605312048" defer></script>
+</body>
+</html>

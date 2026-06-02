@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Variação 3, Grid Masonry com Reveal</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css?v=20260520b">
+  <style>
+    body { background: var(--paper); }
+
+    .entres-gallery {
+      min-height: 100vh;
+      padding: clamp(5rem, 10vw, 8rem) 0 clamp(4rem, 8vw, 6rem);
+      background: var(--paper);
+      color: var(--ink);
+    }
+    .entres-gallery__inner {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    /* --- Header: split layout --- */
+    .entres-gallery__head {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: end;
+      margin-bottom: clamp(3rem, 6vw, 5rem);
+    }
+    .entres-gallery__head .eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 0.75rem;
+    }
+    .entres-gallery__head h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(2rem, 1.4rem + 2.5vw, 3.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.012em;
+      color: var(--ink);
+      margin: 0;
+    }
+    .entres-gallery__head h2 em {
+      font-style: italic;
+      font-weight: 300;
+    }
+    .entres-gallery__head-right {
+      text-align: right;
+    }
+    .entres-gallery__head-right p {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1rem, 1.3vw, 1.2rem);
+      color: var(--ink-soft);
+      max-width: 38ch;
+      margin-left: auto;
+      line-height: 1.6;
+    }
+    @media (max-width: 700px) {
+      .entres-gallery__head {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .entres-gallery__head-right {
+        text-align: left;
+      }
+      .entres-gallery__head-right p { margin-left: 0; }
+    }
+
+    /* --- Masonry-style columns --- */
+    .masonry {
+      columns: 3;
+      column-gap: clamp(0.75rem, 1.5vw, 1.25rem);
+    }
+    .masonry__item {
+      break-inside: avoid;
+      margin-bottom: clamp(0.75rem, 1.5vw, 1.25rem);
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+    }
+    .masonry__item.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .masonry__item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.6s var(--ease);
+    }
+    .masonry__item:hover img {
+      transform: scale(1.03);
+    }
+
+    /* Overlay on hover */
+    .masonry__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(31, 51, 40, 0.7) 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: 1.25rem;
+      opacity: 0;
+      transition: opacity 0.4s var(--ease);
+    }
+    .masonry__item:hover .masonry__overlay {
+      opacity: 1;
+    }
+    .masonry__overlay span {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.05rem;
+      color: var(--sand);
+      line-height: 1.3;
+    }
+
+    @media (max-width: 900px) { .masonry { columns: 2; } }
+    @media (max-width: 500px) { .masonry { columns: 2; column-gap: 6px; } .masonry__item { margin-bottom: 6px; border-radius: 2px; } }
+
+    /* --- CTA --- */
+    .entres-gallery__cta {
+      text-align: center;
+      margin-top: clamp(3rem, 6vw, 5rem);
+    }
+    .entres-gallery__cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--green-deep);
+      text-decoration: none;
+      padding: 1rem 2.2rem;
+      border: 1px solid rgba(31, 51, 40, 0.3);
+      border-radius: 999px;
+      transition: background 0.35s var(--ease), border-color 0.35s var(--ease), transform 0.35s var(--ease), color 0.35s var(--ease);
+    }
+    .entres-gallery__cta a:hover {
+      background: var(--green-deep);
+      border-color: var(--green-deep);
+      color: var(--sand);
+      transform: translateY(-2px);
+    }
+    .entres-gallery__cta a svg {
+      width: 14px; height: 14px;
+      transition: transform 0.35s var(--ease);
+    }
+    .entres-gallery__cta a:hover svg {
+      transform: translateX(3px);
+    }
+
+    /* --- Divider line --- */
+    .entres-gallery__divider {
+      width: 48px;
+      height: 1px;
+      background: var(--ink-soft);
+      opacity: 0.25;
+      margin: 0 auto clamp(1.5rem, 3vw, 2.5rem);
+    }
+    .entres-gallery__count {
+      text-align: center;
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      opacity: 0.6;
+      margin-bottom: 0.75rem;
+    }
+
+    .tag {
+      position: fixed; top: 1rem; left: 1rem; z-index: 100;
+      background: rgba(31,51,40,0.9); color: var(--sand);
+      padding: 0.5rem 1rem; border-radius: 4px;
+      font-family: var(--font-body); font-size: 0.7rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      backdrop-filter: blur(8px);
+    }
+    .tag strong { font-weight: 600; }
+    .nav-variacoes {
+      position: fixed; top: 1rem; right: 1rem; z-index: 100;
+      display: flex; gap: 0.5rem;
+    }
+    .nav-variacoes a {
+      background: rgba(31,51,40,0.9); color: var(--sand);
+      padding: 0.5rem 0.9rem; border-radius: 4px;
+      font-family: var(--font-body); font-size: 0.65rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      text-decoration: none; backdrop-filter: blur(8px);
+      border: 1px solid rgba(237,227,210,0.15);
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .nav-variacoes a:hover, .nav-variacoes a.active {
+      border-color: rgba(237,227,210,0.5);
+      background: rgba(31,51,40,1);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="tag"><strong>V3</strong>, Masonry com Reveal</div>
+  <nav class="nav-variacoes">
+    <a href="v1.html">V1</a>
+    <a href="v2.html">V2</a>
+    <a href="v3.html" class="active">V3</a>
+  </nav>
+
+  <section class="entres-gallery">
+    <div class="entres-gallery__inner">
+      <div class="entres-gallery__head">
+        <div>
+          <p class="eyebrow">Os entres</p>
+          <h2>O lugar onde <em>as memórias ficam guardadas.</em></h2>
+        </div>
+        <div class="entres-gallery__head-right">
+          <p>Onde o hóspede está quando não está no quarto e não está numa atividade. Aqui mora a metade do que se leva.</p>
+        </div>
+      </div>
+
+      <div class="masonry">
+        <figure class="masonry__item">
+          <img src="/assets/img/rede-bangalo.jpg" alt="Rede na varanda do bangalô" loading="lazy">
+          <div class="masonry__overlay"><span>A varanda com rede</span></div>
+        </figure>
+
+        <figure class="masonry__item">
+          <img src="/assets/img/barcos-aerea.jpg" alt="Barcos no rio ao entardecer" loading="lazy">
+          <div class="masonry__overlay"><span>O rio ao entardecer</span></div>
+        </figure>
+
+        <figure class="masonry__item">
+          <img src="/assets/img/cafe-da-manha.jpg" alt="Café da manhã" loading="lazy">
+          <div class="masonry__overlay"><span>A sombra da mata densa</span></div>
+        </figure>
+
+        <figure class="masonry__item">
+          <img src="/assets/img/yoga.jpg" alt="Yoga ao nascer do sol" loading="lazy">
+          <div class="masonry__overlay"><span>O silêncio da manhã</span></div>
+        </figure>
+
+        <figure class="masonry__item">
+          <img src="/assets/img/vila-aerea.jpg" alt="Vista aérea da vila" loading="lazy">
+          <div class="masonry__overlay"><span>A vila sem carros</span></div>
+        </figure>
+
+        <figure class="masonry__item">
+          <img src="/assets/img/caminhada-praia.jpg" alt="Caminho até a praia" loading="lazy">
+          <div class="masonry__overlay"><span>O caminho até a praia</span></div>
+        </figure>
+
+        <figure class="masonry__item">
+          <img src="/assets/img/canoa.jpg" alt="Canoa no rio" loading="lazy">
+          <div class="masonry__overlay"><span>O rio por dentro</span></div>
+        </figure>
+
+        <figure class="masonry__item">
+          <img src="/assets/img/massagem.jpg" alt="Massagem ao ar livre" loading="lazy">
+          <div class="masonry__overlay"><span>O deck da lagoa</span></div>
+        </figure>
+
+        <figure class="masonry__item">
+          <img src="/assets/img/bangalo-amarelo.jpg" alt="Bangalô Amarelo" loading="lazy">
+          <div class="masonry__overlay"><span>O céu sem fios</span></div>
+        </figure>
+
+        <figure class="masonry__item">
+          <img src="/assets/img/bangalo-lilas.jpg" alt="Bangalô Lilás" loading="lazy">
+          <div class="masonry__overlay"><span>Cores no jardim</span></div>
+        </figure>
+
+        <figure class="masonry__item">
+          <img src="/assets/img/head-spa.jpg" alt="Head spa" loading="lazy">
+          <div class="masonry__overlay"><span>Bem-estar ao ar livre</span></div>
+        </figure>
+
+        <figure class="masonry__item">
+          <img src="/assets/img/curadoria.jpg" alt="Curadoria de objetos" loading="lazy">
+          <div class="masonry__overlay"><span>Curadoria da casa</span></div>
+        </figure>
+      </div>
+
+      <div class="entres-gallery__cta">
+        <div class="entres-gallery__count">12 de 40+ fotos</div>
+        <div class="entres-gallery__divider"></div>
+        <a href="/galeria/index.html">
+          Ver galeria completa
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const items = document.querySelectorAll('.masonry__item');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.transitionDelay = (Math.random() * 200) + 'ms';
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    items.forEach(item => observer.observe(item));
+  </script>
+
+</body>
+</html>

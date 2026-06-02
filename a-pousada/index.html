@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Contato, Pousada Lagoa Caraíva</title>
+  <meta name="description" content="Entre em contato com a Pousada Lagoa Caraíva. WhatsApp, e-mail, Instagram e reservas.">
+  <meta name="theme-color" content="#1F3328">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <style>
+    body{background:var(--green-deep)}
+
+    /* Hero */
+    .contato-hero{position:relative;min-height:60vh;display:flex;align-items:flex-end;justify-content:center;text-align:center;padding:clamp(8rem,14vw,11rem) var(--gutter) clamp(4rem,8vw,6rem);overflow:hidden}
+    .contato-hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+    .contato-hero__overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(31,51,40,.15) 0%,rgba(31,51,40,.6) 100%)}
+    .contato-hero__content{position:relative;z-index:2;max-width:680px}
+    .contato-hero__eyebrow{font-family:var(--font-body);font-size:.65rem;text-transform:uppercase;letter-spacing:.25em;color:rgba(237,227,210,.6);margin-bottom:1.25rem}
+    .contato-hero__title{font-family:var(--font-display);font-weight:400;font-size:clamp(2.8rem,6vw,5rem);line-height:1.04;color:var(--sand);text-shadow:0 2px 20px rgba(0,0,0,.3)}
+    .contato-hero__title em{font-style:italic;font-weight:300}
+    .contato-hero__sub{margin-top:1rem;font-family:var(--font-display);font-style:italic;font-weight:300;font-size:clamp(1.05rem,1.5vw,1.25rem);color:rgba(237,227,210,.8);text-shadow:0 1px 8px rgba(0,0,0,.2)}
+
+    /* Grid principal */
+    .contato-body{color:#fff;padding:clamp(4rem,8vw,6rem) var(--gutter)}
+    .contato-grid{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(3rem,8vw,6rem);align-items:start}
+
+    /* Canais */
+    .canais h2{font-family:var(--font-display);font-weight:400;font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:clamp(1.5rem,3vw,2.5rem)}
+    .canais h2 em{font-style:italic;font-weight:300}
+    .canal{display:flex;align-items:center;gap:1.25rem;margin-bottom:1.75rem;text-decoration:none;color:#fff;padding:1rem 1.25rem;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);transition:background .3s,border-color .3s}
+    .canal:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15)}
+    .canal__icon{flex-shrink:0;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center}
+    .canal__icon svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:1.5}
+    .canal__text h3{font-family:var(--font-body);font-size:.9rem;font-weight:600;margin:0 0 .2rem}
+    .canal__text p{font-family:var(--font-body);font-size:.82rem;color:rgba(255,255,255,.55);margin:0;line-height:1.5}
+
+    /* Endereço + mapa */
+    .endereco h2{font-family:var(--font-display);font-weight:400;font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:clamp(1.5rem,3vw,2.5rem)}
+    .endereco h2 em{font-style:italic;font-weight:300}
+    .endereco__info{font-family:var(--font-body);font-size:1rem;line-height:1.75;color:rgba(255,255,255,.75);margin-bottom:1.5rem}
+    .endereco__info strong{color:#fff}
+    .endereco__map{width:100%;aspect-ratio:16/10;border:none;border-radius:8px;filter:grayscale(20%) brightness(.85)}
+
+    /* CTA */
+    .contato-cta{text-align:center;padding:clamp(2rem,4vw,3rem) var(--gutter) clamp(4rem,8vw,6rem)}
+    .contato-cta h2{font-family:var(--font-display);font-weight:400;font-size:clamp(1.8rem,3vw,2.8rem);color:var(--sand);margin-bottom:1.5rem}
+    .contato-cta h2 em{font-style:italic;font-weight:300}
+
+    @media(max-width:800px){
+      .contato-grid{grid-template-columns:1fr;gap:3rem}
+      .endereco__map{aspect-ratio:4/3}
+    }
+  </style>
+  <!-- GTM -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TS2X8Z5L');</script>
+</head>
+<body>
+  <!-- GTM noscript -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TS2X8Z5L" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <header class="header">
+    <div class="header__inner">
+      <a class="logo" href="../index.html" aria-label="Pousada Lagoa Caraíva">
+        <img class="logo__img" src="/assets/img/logo.png" alt="Lagoa Caraíva">
+      </a>
+      <nav class="nav" aria-label="Navegação principal">
+        <a href="../index.html">Home</a>
+        <a href="../os-bangalos/index.html">Bangalôs</a>
+        <a href="../experiencias/index.html">Experiências</a>
+        <a href="../galeria/index.html">Galeria</a>
+        <a href="../casamentos/index.html">Eventos</a>
+        <a href="../a-pousada/index.html" aria-current="page">Contato</a>
+      </nav>
+      <div class="header__cta">
+        <a href="#" class="btn-primary btn-sm" onclick="openBooking();return false">Reservar</a>
+        <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">
+          <span class="menu-toggle__bar"></span>
+          <span class="menu-toggle__bar"></span>
+          <span class="menu-toggle__bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="menu-overlay" id="menu-overlay">
+    <nav class="menu-overlay__nav">
+      <a href="../index.html">Home</a>
+      <a href="../os-bangalos/index.html">Bangalôs</a>
+      <a href="../experiencias/index.html">Experiências</a>
+      <a href="../galeria/index.html">Galeria</a>
+      <a href="../casamentos/index.html">Eventos</a>
+      <a href="../a-pousada/index.html">Contato</a>
+    </nav>
+    <div class="menu-overlay__social">
+      <a href="https://www.instagram.com/lagoacaraiva/" aria-label="Instagram" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="https://facebook.com/pousadalagoacaraiva" aria-label="Facebook" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <a href="https://wa.me/557399856862" aria-label="WhatsApp" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+      </a>
+    </div>
+    <div class="menu-overlay__footer">
+      <a href="#" onclick="openBooking();return false" class="btn-primary">Reservar agora</a>
+    </div>
+  </div>
+
+  <main>
+    <section class="contato-hero">
+      <img class="contato-hero__img" src="/assets/img/Lagoa Caraiva Nina197.jpg" alt="Herminia na porta da pousada">
+      <div class="contato-hero__overlay"></div>
+      <div class="contato-hero__content">
+        <p class="contato-hero__eyebrow">Contato</p>
+        <h1 class="contato-hero__title">Fale <em>com a gente.</em></h1>
+        <p class="contato-hero__sub">Nossa equipe te responderá pessoalmente.</p>
+      </div>
+    </section>
+
+    <section class="contato-body">
+      <div class="contato-grid">
+        <div class="canais">
+          <h2>Nossos <em>canais.</em></h2>
+          <a href="https://wa.me/557399856862" class="canal" target="_blank" rel="noopener">
+            <div class="canal__icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+            <div class="canal__text"><h3>WhatsApp</h3><p>+55 73 9985-6862</p></div>
+          </a>
+          <a href="mailto:contato@lagoacaraiva.com.br" class="canal">
+            <div class="canal__icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div class="canal__text"><h3>E-mail</h3><p>contato@lagoacaraiva.com.br</p></div>
+          </a>
+          <a href="https://www.instagram.com/lagoacaraiva/" class="canal" target="_blank" rel="noopener">
+            <div class="canal__icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/></svg></div>
+            <div class="canal__text"><h3>Instagram</h3><p>@lagoacaraiva</p></div>
+          </a>
+          <a href="#" onclick="openBooking();return false" class="canal">
+            <div class="canal__icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+            <div class="canal__text"><h3>Reservas</h3><p>Verificar disponibilidade e reservar online</p></div>
+          </a>
+        </div>
+        <div class="endereco">
+          <h2>Onde <em>estamos.</em></h2>
+          <div class="endereco__info">
+            <strong>Pousada Lagoa Caraíva</strong><br>
+            Rua da Lagoa, 1900<br>
+            Caraíva, Porto Seguro, Bahia<br>
+            CEP 45819-000<br><br>
+            Caraíva é acessada por canoa. Não há acesso por carro até a vila, a travessia faz parte da chegada.
+          </div>
+          <iframe class="endereco__map" src="https://maps.google.com/maps?q=Pousada+Lagoa+Caraíva&output=embed" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="contato-cta">
+      <h2>Prefere reservar <em>direto?</em></h2>
+      <a href="#" onclick="openBooking();return false" class="btn-primary">Verificar disponibilidade</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__col footer__col--brand">
+        <span class="logo logo--footer"><img class="logo__img" src="/assets/img/logo.png" alt="Lagoa Caraíva"></span>
+        <p>Lagoa Caraíva, onde o tempo passa no ritmo da maré, viva a magia da travessia.</p>
+      </div>
+      <div class="footer__col"><h4>Endereço</h4><p>Rua da Lagoa, 1900<br>Caraíva, Porto Seguro, Bahia</p></div>
+      <div class="footer__col"><h4>Contato</h4><p><a href="https://wa.me/557399856862">WhatsApp</a><br><a href="mailto:contato@lagoacaraiva.com.br">contato@lagoacaraiva.com.br</a><br><a href="https://www.instagram.com/lagoacaraiva/">@lagoacaraiva</a></p></div>
+      <div class="footer__col"><h4>Reservas</h4><p><a href="#" onclick="openBooking();return false">Verificar disponibilidade</a><br><a href="../casamentos/index.html">Eventos</a></p></div>
+    </div>
+    <div class="footer__base">
+      <small>&copy; 2026 Pousada Lagoa Caraíva · CNPJ 10.650.995/0001-90</small>
+      <small>site por <a href="#">CI Digital Marketing</a></small>
+    </div>
+  </footer>
+
+  <script>
+    (function(){var h=document.querySelector('.header');if(!h)return;function c(){h.classList.toggle('is-scrolled',window.scrollY>60)}window.addEventListener('scroll',c,{passive:true});c()})();
+    (function(){var b=document.querySelector('.menu-toggle'),o=document.getElementById('menu-overlay');if(!b||!o)return;b.addEventListener('click',function(){var open=b.classList.toggle('is-open');o.classList.toggle('is-open');b.setAttribute('aria-expanded',open);document.body.style.overflow=open?'hidden':''});o.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){b.classList.remove('is-open');o.classList.remove('is-open');b.setAttribute('aria-expanded','false');document.body.style.overflow=''})})})();
+  </script>
+  <script src="/assets/js/widgets.js?v=2605312048" defer></script>
+</body>
+</html>

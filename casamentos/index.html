@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Casamentos e Eventos, Pousada Lagoa Caraíva</title>
+  <meta name="description" content="Organize seu casamento ou evento na Pousada Lagoa Caraíva. Um local único, charmoso e especial em Caraíva, Bahia.">
+  <meta name="theme-color" content="#1F3328">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css?v=20260526">
+  <style>
+    /* Hero */
+    .eventos-hero{position:relative;min-height:70vh;display:flex;align-items:flex-end;justify-content:center;text-align:center;padding:clamp(10rem,18vw,14rem) var(--gutter) clamp(4rem,8vw,6rem);overflow:hidden}
+    .eventos-hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+    .eventos-hero__overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(37,69,90,.6) 0%,rgba(37,69,90,.3) 40%,rgba(37,69,90,.7) 100%)}
+    .eventos-hero__content{position:relative;z-index:2}
+    .eventos-hero__eyebrow{font-family:var(--font-body);font-size:.65rem;text-transform:uppercase;letter-spacing:.25em;color:rgba(237,227,210,.55);margin-bottom:1.25rem}
+    .eventos-hero__title{font-family:var(--font-display);font-weight:300;font-size:clamp(2.5rem,5vw,4.5rem);line-height:1.06;color:var(--sand);text-shadow:0 2px 20px rgba(0,0,0,.3);margin:0 0 1.25rem}
+    .eventos-hero__title em{font-style:italic;font-weight:400}
+    .eventos-hero__sub{font-family:var(--font-display);font-style:italic;font-weight:300;font-size:clamp(1.05rem,1.5vw,1.3rem);color:rgba(237,227,210,.8);max-width:48ch;margin:0 auto;text-shadow:0 1px 8px rgba(0,0,0,.2)}
+
+    /* Editorial */
+    .editorial{max-width:760px;margin:0 auto;padding:clamp(3rem,7vw,5rem) var(--gutter)}
+    .editorial__eyebrow{font-family:var(--font-body);font-size:.65rem;text-transform:uppercase;letter-spacing:.25em;color:var(--ink-soft);margin-bottom:1rem}
+    .editorial__title{font-family:var(--font-display);font-weight:400;font-size:clamp(1.6rem,2.5vw,2.4rem);line-height:1.15;color:var(--ink);margin-bottom:1.5rem}
+    .editorial__title em{font-style:italic;font-weight:300;color:var(--green)}
+    .editorial__text{font-family:var(--font-display);font-size:1.2rem;line-height:1.7;color:var(--ink-soft);margin-bottom:1.25em}
+
+    /* Photo trio */
+    .photo-trio{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(.5rem,1vw,.75rem);max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}
+    .photo-trio__item{overflow:hidden;border-radius:4px;aspect-ratio:3/4;background:linear-gradient(160deg,rgba(31,51,40,.3),rgba(31,51,40,.7));display:flex;align-items:center;justify-content:center;color:rgba(237,227,210,.3);font:italic 1rem 'Cormorant Garamond',serif}
+    .photo-trio__item img{width:100%;height:100%;object-fit:cover;display:block}
+    @media(max-width:700px){
+      .photo-trio{
+        grid-template-columns:1fr 1fr;
+        grid-template-rows:auto auto;
+        gap:.6rem;
+      }
+      .photo-trio__item:first-child{
+        grid-column:span 2;
+        aspect-ratio:16/10;
+      }
+      .photo-trio__item{aspect-ratio:1/1}
+    }
+
+    /* Photo duo */
+    .photo-duo{display:grid;grid-template-columns:1fr 1fr;gap:4px;max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}
+    .photo-duo__item{overflow:hidden;border-radius:4px;aspect-ratio:4/3;background:linear-gradient(160deg,rgba(31,51,40,.3),rgba(31,51,40,.7));display:flex;align-items:center;justify-content:center;color:rgba(237,227,210,.3);font:italic 1rem 'Cormorant Garamond',serif}
+    .photo-duo__item img{width:100%;height:100%;object-fit:cover;display:block}
+    @media(max-width:600px){.photo-duo{grid-template-columns:1fr}}
+
+    /* Quote */
+    .quote-block{padding:clamp(3rem,7vw,5rem) var(--gutter);text-align:center;background:var(--green-deep)}
+    .quote-block__text{font-family:var(--font-display);font-style:italic;font-weight:300;font-size:clamp(1.3rem,2.2vw,2rem);line-height:1.5;max-width:680px;margin:0 auto 1rem;color:rgba(237,227,210,.85)}
+    .quote-block__cite{font-family:var(--font-body);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(237,227,210,.4)}
+
+    /* CTA */
+    .cta-section{text-align:center;padding:clamp(3rem,6vw,5rem) var(--gutter);background:var(--blue-deep)}
+    .cta-section .btn-primary{background:var(--blue);color:#fff}
+    .cta-section .btn-primary:hover{background:#5a9ab5}
+    .cta-section h2{font-family:var(--font-display);font-weight:400;font-size:clamp(1.8rem,3vw,2.8rem);color:var(--sand);margin-bottom:1.5rem}
+    .cta-section h2 em{font-style:italic;font-weight:300}
+    .cta-section p{font-family:var(--font-display);font-style:italic;font-size:1.1rem;color:rgba(237,227,210,.65);margin-bottom:2rem}
+
+    body{background:var(--paper)}
+
+    /* Tudo azul nesta página */
+    .header{background-color:transparent !important}
+    .header.is-scrolled{background-color:rgba(37,69,90,.95) !important;backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%)}
+    .menu-overlay{background:var(--blue-deep)}
+    .btn-primary{background:var(--blue)}
+    .btn-primary:hover{background:var(--blue-deep)}
+    .editorial__title em{color:var(--blue)}
+    .footer{background:var(--blue-deep)}
+    .footer__col h4,.footer__col p,.footer__col a,.footer__base small,.footer__base a,.footer__col--brand p{color:var(--sand)}
+    .footer__col a{border-bottom-color:rgba(237,227,210,.3)}
+    .wa-float{background:var(--blue)}
+  </style>
+  <!-- GTM -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TS2X8Z5L');</script>
+</head>
+<body>
+  <!-- GTM noscript -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TS2X8Z5L" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <header class="header">
+    <div class="header__inner">
+      <a class="logo" href="../index.html" aria-label="Pousada Lagoa Caraíva">
+        <img class="logo__img" src="/assets/img/logo.png" alt="Lagoa Caraíva">
+      </a>
+      <nav class="nav" aria-label="Navegação principal">
+        <a href="../index.html">Home</a>
+        <a href="../os-bangalos/index.html">Bangalôs</a>
+        <a href="../experiencias/index.html">Experiências</a>
+        <a href="../galeria/index.html">Galeria</a>
+        <a href="../casamentos/index.html" aria-current="page">Eventos</a>
+        <a href="../a-pousada/index.html">Contato</a>
+      </nav>
+      <div class="header__cta">
+        <a href="#" class="btn-primary btn-sm" onclick="openBooking();return false">Reservar</a>
+        <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">
+          <span class="menu-toggle__bar"></span>
+          <span class="menu-toggle__bar"></span>
+          <span class="menu-toggle__bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="menu-overlay" id="menu-overlay">
+    <nav class="menu-overlay__nav">
+      <a href="../index.html">Home</a>
+      <a href="../os-bangalos/index.html">Bangalôs</a>
+      <a href="../experiencias/index.html">Experiências</a>
+      <a href="../galeria/index.html">Galeria</a>
+      <a href="../casamentos/index.html">Eventos</a>
+      <a href="../a-pousada/index.html">Contato</a>
+    </nav>
+    <div class="menu-overlay__social">
+      <a href="https://www.instagram.com/lagoacaraiva/" aria-label="Instagram" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="https://facebook.com/pousadalagoacaraiva" aria-label="Facebook" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <a href="https://wa.me/557399856862" aria-label="WhatsApp" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+      </a>
+    </div>
+    <div class="menu-overlay__footer">
+      <a href="#" onclick="openBooking();return false" class="btn-primary">Reservar agora</a>
+    </div>
+  </div>
+
+  <main>
+    <!-- HERO -->
+    <section class="eventos-hero">
+      <img class="eventos-hero__img" src="/assets/img/casamento-hero.jpg" alt="Noiva dançando com convidados">
+      <div class="eventos-hero__overlay"></div>
+      <div class="eventos-hero__content">
+        <p class="eventos-hero__eyebrow">Casamentos e Eventos</p>
+        <h1 class="eventos-hero__title">Casamentos <em>e Eventos.</em></h1>
+        <p class="eventos-hero__sub">Reserve a pousada e realize o seu evento na Lagoa Caraíva, um local único, charmoso e especial.</p>
+      </div>
+    </section>
+
+    <!-- EDITORIAL 1 -->
+    <div class="editorial">
+      <p class="editorial__eyebrow">O espaço</p>
+      <h2 class="editorial__title">7.000 m² de jardim tropical, <em>só para vocês.</em></h2>
+      <p class="editorial__text">A pousada pode ser reservada inteiramente para o seu evento. Cerimônia à beira da lagoa, jantar ao ar livre, convidados hospedados nos bangalôs. O cenário já está pronto, a natureza faz a decoração.</p>
+      <p class="editorial__text">Arquitetura local com mais de 30 anos, vila sem carros, céu sem postes. Um lugar onde o evento acontece no ritmo de Caraíva.</p>
+    </div>
+
+    <!-- PHOTO TRIO -->
+    <div style="padding:clamp(2rem,4vw,3rem) 0">
+    <div class="photo-trio">
+      <div class="photo-trio__item"><img src="/assets/img/evento-decor1.jpg" alt="Mesas no jardim" loading="lazy"></div>
+      <div class="photo-trio__item"><img src="/assets/img/evento-decor3.jpg" alt="Bolo e doces" loading="lazy"></div>
+      <div class="photo-trio__item"><img src="/assets/img/evento-decor2.jpg" alt="Detalhes da mesa" loading="lazy"></div>
+    </div>
+    </div>
+
+    <!-- EDITORIAL 2 -->
+    <div class="editorial">
+      <p class="editorial__eyebrow">Formatos</p>
+      <h2 class="editorial__title">Casamentos, retiros <em>e celebrações.</em></h2>
+      <p class="editorial__text">Casamentos pé-na-areia, intimistas, à luz de velas. Retiros de yoga e meditação com programação personalizada. Aniversários, reuniões familiares, encontros entre amigos. Cada evento tem o formato que fizer sentido para quem organiza.</p>
+    </div>
+
+    <!-- PHOTO DUO, placeholders -->
+    <div class="photo-duo">
+      <div class="photo-duo__item"><img src="/assets/img/evento-festa1.jpg" alt="Festa do casamento" loading="lazy"></div>
+      <div class="photo-duo__item"><img src="/assets/img/evento-festa2.jpg" alt="Convidados na festa" loading="lazy"></div>
+    </div>
+
+    <!-- EDITORIAL 3 -->
+    <div class="editorial">
+      <p class="editorial__eyebrow">O que a gente cuida</p>
+      <h2 class="editorial__title">A logística é <em>com a gente.</em></h2>
+      <p class="editorial__text">Locação dos espaços, hospedagem nos bangalôs, café da manhã estendido, organização logística do dia. Indicações de fornecedores locais, buffet, DJ, flores, celebrante, fotógrafo. Tudo coordenado pela equipe da pousada.</p>
+      <p class="editorial__text">O agendamento prioriza meia-estação. O primeiro passo é sempre uma conversa para entender o que vocês precisam.</p>
+    </div>
+
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <h2>Quer organizar seu evento <em>aqui?</em></h2>
+      <p>Converse com a equipe pelo WhatsApp.</p>
+      <a href="https://wa.me/557399856862?text=Ol%C3%A1!%20Quero%20fazer%20o%20meu%20evento%20na%20Pousada%20Lagoa%20Cara%C3%ADva!" class="btn-primary" target="_blank" rel="noopener">Falar pelo WhatsApp</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__col footer__col--brand">
+        <span class="logo logo--footer"><img class="logo__img" src="/assets/img/logo.png" alt="Lagoa Caraíva"></span>
+        <p>Lagoa Caraíva, onde o tempo passa no ritmo da maré, viva a magia da travessia.</p>
+      </div>
+      <div class="footer__col"><h4>Endereço</h4><p>Rua da Lagoa, 1900<br>Caraíva, Porto Seguro, Bahia</p></div>
+      <div class="footer__col"><h4>Contato</h4><p><a href="https://wa.me/557399856862">WhatsApp</a><br><a href="mailto:contato@lagoacaraiva.com.br">contato@lagoacaraiva.com.br</a><br><a href="https://www.instagram.com/lagoacaraiva/">@lagoacaraiva</a></p></div>
+      <div class="footer__col"><h4>Reservas</h4><p><a href="#" onclick="openBooking();return false">Verificar disponibilidade</a><br><a href="../casamentos/index.html">Eventos</a></p></div>
+    </div>
+    <div class="footer__base">
+      <small>&copy; 2026 Pousada Lagoa Caraíva · CNPJ 10.650.995/0001-90</small>
+      <small>site por <a href="#">CI Digital Marketing</a></small>
+    </div>
+  </footer>
+
+  <script>
+    (function initHeaderScroll() {
+      var header = document.querySelector('.header');
+      if (!header) return;
+      function check() {
+        if (window.scrollY > 60) {
+          header.classList.add('is-scrolled');
+          header.style.backgroundColor = 'rgba(37, 69, 90, 0.95)';
+          header.style.backdropFilter = 'blur(16px) saturate(140%)';
+        } else {
+          header.classList.remove('is-scrolled');
+          header.style.backgroundColor = 'transparent';
+          header.style.backdropFilter = 'none';
+        }
+      }
+      window.addEventListener('scroll', check, { passive: true });
+      check();
+    })();
+
+    (function initMenuToggle() {
+      var btn = document.querySelector('.menu-toggle');
+      var overlay = document.getElementById('menu-overlay');
+      if (!btn || !overlay) return;
+      btn.addEventListener('click', function () {
+        var open = btn.classList.toggle('is-open');
+        overlay.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+      });
+      overlay.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          btn.classList.remove('is-open');
+          overlay.classList.remove('is-open');
+          btn.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        });
+      });
+    })();
+  </script>
+  <script src="/assets/js/widgets.js?v=2605312048" defer></script>
+</body>
+</html>

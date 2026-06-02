@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>V1, Grid 3+2 com hero tipográfico</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <style>
+    body{background:var(--paper);margin:0}
+    .var-tag{position:fixed;top:1rem;left:1rem;z-index:900;background:var(--green-deep);color:#fff;font:600 .75rem/1 'Inter',sans-serif;padding:.45rem .75rem;border-radius:4px;letter-spacing:.04em;text-transform:uppercase}
+    .var-nav{position:fixed;top:1rem;right:1rem;z-index:900;display:flex;gap:.35rem}
+    .var-nav a{background:var(--green-deep);color:#fff;font:600 .7rem/1 'Inter',sans-serif;padding:.45rem .65rem;border-radius:4px;text-decoration:none;letter-spacing:.03em;opacity:.55;transition:opacity .2s}
+    .var-nav a:hover,.var-nav a.is-active{opacity:1}
+
+    /* Hero tipográfico escuro */
+    .hero{background:var(--green-deep);color:var(--sand);padding:clamp(8rem,15vw,12rem) var(--gutter) clamp(4rem,8vw,6rem);text-align:center}
+    .hero .eyebrow{font-family:var(--font-body);font-size:.65rem;text-transform:uppercase;letter-spacing:.25em;color:rgba(237,227,210,.45);margin-bottom:1.25rem}
+    .hero h1{font-family:var(--font-display);font-weight:300;font-size:clamp(2.5rem,5vw,4.5rem);line-height:1.06;margin:0 0 1.25rem}
+    .hero h1 em{font-style:italic;font-weight:400}
+    .hero p{font-family:var(--font-display);font-style:italic;font-weight:300;font-size:clamp(1.05rem,1.5vw,1.3rem);color:rgba(237,227,210,.7);max-width:48ch;margin:0 auto}
+
+    /* Grid: 3 em cima + 2 embaixo centralizados */
+    .grid-section{padding:clamp(3rem,6vw,5rem) var(--gutter);max-width:var(--container);margin:0 auto}
+    .grid-top{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,2vw,1.5rem)}
+    .grid-bottom{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1rem,2vw,1.5rem);max-width:66.66%;margin:clamp(1rem,2vw,1.5rem) auto 0}
+
+    .card-link{position:relative;overflow:hidden;border-radius:6px;aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;text-decoration:none;color:#fff;transition:transform .4s var(--ease)}
+    .card-link:hover{transform:translateY(-4px)}
+    .card-link img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+    .card-link:hover img{transform:scale(1.04)}
+    .card-link::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.65) 100%)}
+    .card-link__body{position:relative;z-index:2;padding:1.5rem}
+    .card-link__name{font-family:var(--font-display);font-size:1.6rem;font-weight:400;margin:0 0 .35rem}
+    .card-link__meta{font-family:var(--font-body);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;opacity:.7}
+
+    @media(max-width:700px){
+      .grid-top,.grid-bottom{grid-template-columns:1fr;max-width:100%}
+      .card-link{aspect-ratio:4/3}
+    }
+  </style>
+</head>
+<body>
+
+<span class="var-tag">V1, Grid 3+2</span>
+<nav class="var-nav"><a href="v1.html" class="is-active">V1</a><a href="v2.html">V2</a><a href="v3.html">V3</a></nav>
+
+<div class="hero">
+  <p class="eyebrow">Acomodações</p>
+  <h1>Cinco cores, cinco <em>temperamentos.</em></h1>
+  <p>Arquitetura local com mais de 30 anos, em 7.000 m² de jardim tropical. Cada bangalô tem varanda, rede e banheiro privativo.</p>
+</div>
+
+<div class="grid-section">
+  <div class="grid-top">
+    <a href="bangalo-amarelo.html" class="card-link"><img src="/assets/amarelo/IMG_9708-2.jpg" alt="Bangalô Amarelo"><div class="card-link__body"><h3 class="card-link__name">Amarelo</h3><p class="card-link__meta">2 pessoas · Casal · 45 m²</p></div></a>
+    <a href="bangalo-laranja.html" class="card-link"><img src="/assets/laranja/IMG_8919-2.jpg" alt="Bangalô Laranja"><div class="card-link__body"><h3 class="card-link__name">Laranja</h3><p class="card-link__meta">2 pessoas · Casal · 45 m²</p></div></a>
+    <a href="bangalo-azul.html" class="card-link"><img src="/assets/azul/1-menino-na-rede.jpg" alt="Bangalô Azul"><div class="card-link__body"><h3 class="card-link__name">Azul</h3><p class="card-link__meta">2 pessoas · Casal · 45 m²</p></div></a>
+  </div>
+  <div class="grid-bottom">
+    <a href="bangalo-lilas.html" class="card-link"><img src="/assets/lilás/IMG_8124-2.jpg" alt="Bangalô Lilás"><div class="card-link__body"><h3 class="card-link__name">Lilás</h3><p class="card-link__meta">Até 5 pessoas · Família · ~52 m²</p></div></a>
+    <a href="bangalo-branco.html" class="card-link"><img src="/assets/branco/IMG_0140-2.jpg" alt="Bangalô Branco"><div class="card-link__body"><h3 class="card-link__name">Branco</h3><p class="card-link__meta">Até 7 pessoas · Grupo · ~90 m²</p></div></a>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Variação 2, Scroll Horizontal com Legendas</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css?v=20260520b">
+  <style>
+    body { background: var(--green-deep); }
+
+    .entres-gallery {
+      min-height: 100vh;
+      padding: clamp(5rem, 10vw, 8rem) 0 clamp(4rem, 8vw, 6rem);
+      background: var(--green-deep);
+      color: var(--sand);
+      overflow: hidden;
+    }
+    .entres-gallery__head {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: clamp(2rem, 4vw, 3rem);
+    }
+    .entres-gallery__head .eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(237, 227, 210, 0.55);
+      margin-bottom: 0.75rem;
+    }
+    .entres-gallery__head h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(2rem, 1.4rem + 2.5vw, 3.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.012em;
+      color: var(--sand);
+      margin: 0;
+      max-width: 20ch;
+    }
+    .entres-gallery__head h2 em {
+      font-style: italic;
+      font-weight: 300;
+    }
+    .entres-gallery__counter {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(237, 227, 210, 0.5);
+    }
+    .entres-gallery__counter span {
+      color: var(--sand);
+      font-weight: 500;
+    }
+
+    /* --- Horizontal scroll strip --- */
+    .hstrip {
+      display: flex;
+      gap: clamp(1rem, 2vw, 1.5rem);
+      padding: 0 var(--gutter);
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      cursor: grab;
+    }
+    .hstrip::-webkit-scrollbar { display: none; }
+    .hstrip:active { cursor: grabbing; }
+
+    .hstrip__item {
+      flex: 0 0 auto;
+      width: clamp(280px, 38vw, 480px);
+      scroll-snap-align: start;
+    }
+    .hstrip__media {
+      position: relative;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      border-radius: 4px;
+      margin: 0;
+    }
+    .hstrip__media img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s var(--ease);
+    }
+    .hstrip__item:hover .hstrip__media img {
+      transform: scale(1.04);
+    }
+    .hstrip__caption {
+      padding: 1rem 0;
+    }
+    .hstrip__title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 1.15rem;
+      color: var(--sand);
+      margin: 0 0 0.35rem;
+    }
+    .hstrip__desc {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: rgba(237, 227, 210, 0.6);
+      margin: 0;
+      max-width: 36ch;
+    }
+
+    /* --- CTA final card --- */
+    .hstrip__cta-card {
+      flex: 0 0 auto;
+      width: clamp(240px, 30vw, 360px);
+      scroll-snap-align: start;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hstrip__cta-inner {
+      text-align: center;
+      padding: 2rem;
+    }
+    .hstrip__cta-inner p {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.15rem;
+      color: rgba(237, 227, 210, 0.7);
+      margin: 0 0 1.5rem;
+      max-width: 22ch;
+    }
+    .btn-gallery {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--sand);
+      text-decoration: none;
+      padding: 1rem 2.2rem;
+      border: 1px solid rgba(237, 227, 210, 0.35);
+      border-radius: 999px;
+      transition: background 0.35s var(--ease), border-color 0.35s var(--ease), transform 0.35s var(--ease);
+    }
+    .btn-gallery:hover {
+      background: rgba(237, 227, 210, 0.1);
+      border-color: rgba(237, 227, 210, 0.6);
+      transform: translateY(-2px);
+    }
+    .btn-gallery svg {
+      width: 14px; height: 14px;
+      transition: transform 0.35s var(--ease);
+    }
+    .btn-gallery:hover svg {
+      transform: translateX(3px);
+    }
+
+    /* --- Progress bar --- */
+    .hstrip-progress {
+      max-width: var(--container);
+      margin: clamp(1.5rem, 3vw, 2.5rem) auto 0;
+      padding: 0 var(--gutter);
+    }
+    .hstrip-progress__track {
+      width: 100%;
+      height: 1px;
+      background: rgba(237, 227, 210, 0.15);
+      position: relative;
+      border-radius: 1px;
+    }
+    .hstrip-progress__fill {
+      position: absolute;
+      left: 0; top: 0;
+      height: 100%;
+      background: var(--sand);
+      border-radius: 1px;
+      transition: width 0.3s var(--ease);
+      width: 0%;
+    }
+
+    .tag {
+      position: fixed; top: 1rem; left: 1rem; z-index: 100;
+      background: rgba(31,51,40,0.9); color: var(--sand);
+      padding: 0.5rem 1rem; border-radius: 4px;
+      font-family: var(--font-body); font-size: 0.7rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      backdrop-filter: blur(8px);
+    }
+    .tag strong { font-weight: 600; }
+    .nav-variacoes {
+      position: fixed; top: 1rem; right: 1rem; z-index: 100;
+      display: flex; gap: 0.5rem;
+    }
+    .nav-variacoes a {
+      background: rgba(31,51,40,0.9); color: var(--sand);
+      padding: 0.5rem 0.9rem; border-radius: 4px;
+      font-family: var(--font-body); font-size: 0.65rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      text-decoration: none; backdrop-filter: blur(8px);
+      border: 1px solid rgba(237,227,210,0.15);
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .nav-variacoes a:hover, .nav-variacoes a.active {
+      border-color: rgba(237,227,210,0.5);
+      background: rgba(31,51,40,1);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="tag"><strong>V2</strong>, Scroll Horizontal + Legendas</div>
+  <nav class="nav-variacoes">
+    <a href="v1.html">V1</a>
+    <a href="v2.html" class="active">V2</a>
+    <a href="v3.html">V3</a>
+  </nav>
+
+  <section class="entres-gallery">
+    <div class="entres-gallery__head">
+      <div>
+        <p class="eyebrow">Os entres</p>
+        <h2>O lugar onde <em>as memórias ficam guardadas.</em></h2>
+      </div>
+      <div class="entres-gallery__counter">
+        <span id="current-count">01</span> / 09
+      </div>
+    </div>
+
+    <div class="hstrip" id="hstrip">
+      <article class="hstrip__item">
+        <figure class="hstrip__media">
+          <img src="/assets/img/rede-bangalo.jpg" alt="Rede na varanda do bangalô" loading="lazy">
+        </figure>
+        <div class="hstrip__caption">
+          <h3 class="hstrip__title">A varanda com rede.</h3>
+          <p class="hstrip__desc">Cada bangalô tem a sua. A siesta é negociável; a rede, não.</p>
+        </div>
+      </article>
+
+      <article class="hstrip__item">
+        <figure class="hstrip__media">
+          <img src="/assets/img/cafe-da-manha.jpg" alt="Café da manhã servido à mesa" loading="lazy">
+        </figure>
+        <div class="hstrip__caption">
+          <h3 class="hstrip__title">A sombra da mata densa.</h3>
+          <p class="hstrip__desc">A árvore mais antiga cobre uma mesa de quase nove pessoas. É onde o café da manhã acontece.</p>
+        </div>
+      </article>
+
+      <article class="hstrip__item">
+        <figure class="hstrip__media">
+          <img src="/assets/img/barcos-aerea.jpg" alt="Barcos no rio Caraíva ao entardecer" loading="lazy">
+        </figure>
+        <div class="hstrip__caption">
+          <h3 class="hstrip__title">O rio ao entardecer.</h3>
+          <p class="hstrip__desc">Quando a maré sobe, a água encontra a luz, e a vila inteira para pra ver.</p>
+        </div>
+      </article>
+
+      <article class="hstrip__item">
+        <figure class="hstrip__media">
+          <img src="/assets/img/yoga.jpg" alt="Yoga em sala de madeira" loading="lazy">
+        </figure>
+        <div class="hstrip__caption">
+          <h3 class="hstrip__title">O silêncio da manhã.</h3>
+          <p class="hstrip__desc">Antes do café, antes do banho de rio. Só respiração e o som dos pássaros.</p>
+        </div>
+      </article>
+
+      <article class="hstrip__item">
+        <figure class="hstrip__media">
+          <img src="/assets/img/vila-aerea.jpg" alt="Vista aérea da vila" loading="lazy">
+        </figure>
+        <div class="hstrip__caption">
+          <h3 class="hstrip__title">A vila sem carros.</h3>
+          <p class="hstrip__desc">Nem ruas tem, só areia. E cada caminho leva a algum lugar que não tem pressa.</p>
+        </div>
+      </article>
+
+      <article class="hstrip__item">
+        <figure class="hstrip__media">
+          <img src="/assets/img/caminhada-praia.jpg" alt="Caminho de areia até a praia" loading="lazy">
+        </figure>
+        <div class="hstrip__caption">
+          <h3 class="hstrip__title">O caminho até a praia.</h3>
+          <p class="hstrip__desc">400 metros entre a mata e a areia. O mar aparece no fim.</p>
+        </div>
+      </article>
+
+      <article class="hstrip__item">
+        <figure class="hstrip__media">
+          <img src="/assets/img/canoa.jpg" alt="Canoa no rio" loading="lazy">
+        </figure>
+        <div class="hstrip__caption">
+          <h3 class="hstrip__title">O rio por dentro.</h3>
+          <p class="hstrip__desc">De canoa, em silêncio. O guia conhece cada curva.</p>
+        </div>
+      </article>
+
+      <article class="hstrip__item">
+        <figure class="hstrip__media">
+          <img src="/assets/img/massagem.jpg" alt="Massagem ao ar livre" loading="lazy">
+        </figure>
+        <div class="hstrip__caption">
+          <h3 class="hstrip__title">O deck da lagoa.</h3>
+          <p class="hstrip__desc">Não tem música, tem rãs e o vento entre as folhas.</p>
+        </div>
+      </article>
+
+      <article class="hstrip__item">
+        <figure class="hstrip__media">
+          <img src="/assets/img/bangalo-amarelo.jpg" alt="Bangalô Amarelo" loading="lazy">
+        </figure>
+        <div class="hstrip__caption">
+          <h3 class="hstrip__title">O céu sem fios.</h3>
+          <p class="hstrip__desc">À noite, sem postes, ele reaparece. A vila é tão escura que se enxerga via-láctea no jardim.</p>
+        </div>
+      </article>
+
+      <div class="hstrip__cta-card">
+        <div class="hstrip__cta-inner">
+          <p>Tem mais. Muito mais.</p>
+          <a href="/galeria/index.html" class="btn-gallery">
+            Ver galeria completa
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hstrip-progress">
+      <div class="hstrip-progress__track">
+        <div class="hstrip-progress__fill" id="hstrip-fill"></div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      const strip = document.getElementById('hstrip');
+      const fill = document.getElementById('hstrip-fill');
+      const counter = document.getElementById('current-count');
+      const items = strip.querySelectorAll('.hstrip__item');
+      const total = items.length;
+
+      function update() {
+        const max = strip.scrollWidth - strip.clientWidth;
+        const ratio = max > 0 ? strip.scrollLeft / max : 0;
+        fill.style.width = (ratio * 100) + '%';
+        const idx = Math.min(Math.round(ratio * (total - 1)), total - 1) + 1;
+        counter.textContent = String(idx).padStart(2, '0');
+      }
+      strip.addEventListener('scroll', update, { passive: true });
+      update();
+
+      let isDown = false, startX = 0, startScroll = 0;
+      strip.addEventListener('pointerdown', e => {
+        isDown = true; startX = e.clientX; startScroll = strip.scrollLeft;
+        strip.setPointerCapture(e.pointerId);
+      });
+      strip.addEventListener('pointermove', e => {
+        if (!isDown) return;
+        strip.scrollLeft = startScroll - (e.clientX - startX);
+      });
+      const end = () => { isDown = false; };
+      strip.addEventListener('pointerup', end);
+      strip.addEventListener('pointercancel', end);
+    })();
+  </script>
+
+</body>
+</html>
