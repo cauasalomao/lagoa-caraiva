@@ -1,0 +1,8 @@
+name = "lagoa-caraiva"
+compatibility_date = "2026-06-02"
+
+# Site estático (sem Worker script): serve os arquivos da raiz do repo.
+# Servido na raiz do domínio, então os caminhos relativos do HTML resolvem.
+[assets]
+directory = "."
+not_found_handling = "404-page"

@@ -1,0 +1,25 @@
+# Arquivos que NÃO devem ir para o deploy estático do Cloudflare.
+# Sintaxe estilo .gitignore. Caminhos com / inicial = ancorados na raiz.
+
+# Ferramentas / dependências internas
+_screenshots
+node_modules
+.claude
+.git
+.gitignore
+
+# Config do próprio deploy
+wrangler.toml
+.assetsignore
+
+# Documentos internos (briefings, blueprints, kernels, revisões)
+*.md
+
+# Explorações de design e materiais de trabalho (não fazem parte do site)
+variacoes-*
+triagem-galeria
+
+# Imagens soltas na raiz (originais/prints — as usadas pelo site estão em assets/ e galeria-fotos/)
+/*.png
+/*.jpg
+/*.jpeg
