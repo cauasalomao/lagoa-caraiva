@@ -19,6 +19,7 @@
 <body>
   <!-- GTM noscript -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TS2X8Z5L" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
   <header class="header">
     <div class="header__inner">
       <a class="logo" href="index.html" aria-label="Pousada Lagoa Caraíva">
@@ -85,6 +86,11 @@
     <video class="hero-media hero-media--video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
       <source src="https://customer-am8784crgp4tuk16.cloudflarestream.com/17c6241990093050437065d58f3f77ed/downloads/default.mp4" type="video/mp4">
     </video>
+    <!-- Tela de carregamento: logo sobre fundo verde só na área do vídeo (hero),
+         até o vídeo tocar. Removida via JS (initPreloader) com timeout de segurança. -->
+    <div class="preloader" id="preloader" role="status" aria-label="Carregando">
+      <img class="preloader__logo" src="assets/img/logo.png" alt="" aria-hidden="true">
+    </div>
     <div class="hero__content">
       <p class="lede">Viva sua história na vila onde o tempo passa no ritmo da maré.</p>
     </div>
@@ -760,6 +766,40 @@
         });
       }, { threshold: 0.1 });
       els.forEach(function (el) { obs.observe(el); });
+    })();
+
+    (function initPreloader() {
+      var pre = document.getElementById('preloader');
+      if (!pre) return;
+      var done = false;
+
+      function hide() {
+        if (done) return;
+        done = true;
+        pre.classList.add('is-loaded');
+        setTimeout(function () {
+          if (pre && pre.parentNode) pre.parentNode.removeChild(pre);
+        }, 900);
+      }
+
+      var video = document.querySelector('.hero-media--video');
+      if (video) {
+        // já bufferizado o suficiente?
+        if (video.readyState >= 3) hide();
+        video.addEventListener('playing', hide, { once: true });
+        video.addEventListener('canplaythrough', hide, { once: true });
+        // vídeo indisponível (CDN fora, 4G fraco) -> mostra fallback e libera a tela
+        video.addEventListener('error', hide, { once: true });
+        var src = video.querySelector('source');
+        if (src) src.addEventListener('error', hide, { once: true });
+      } else {
+        hide();
+      }
+
+      // rede lenta segura no máx. ~4s (a imagem de fallback do hero assume)
+      setTimeout(hide, 4000);
+      // garantia extra: quando a página terminar de carregar
+      window.addEventListener('load', function () { setTimeout(hide, 300); });
     })();
 
     (function initHeroSound() {

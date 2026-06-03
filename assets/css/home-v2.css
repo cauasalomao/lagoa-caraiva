@@ -7,6 +7,41 @@
    ===================================================== */
 
 /* =====================================================
+   PRELOADER — logo sobre fundo verde SÓ na área do vídeo
+   (dentro do .hero), até o vídeo estar pronto. Some com
+   fade; removido do DOM via JS. Header e resto do site
+   permanecem livres.
+   ===================================================== */
+.preloader {
+  position: absolute;
+  inset: 0;
+  z-index: 3; /* acima do vídeo/água (0/-1) e do conteúdo (2) do hero */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--green-deep);
+  transition: opacity .8s var(--ease, ease), visibility .8s var(--ease, ease);
+}
+.preloader__logo {
+  width: clamp(140px, 26vw, 220px);
+  height: auto;
+  animation: preloader-pulse 1.8s ease-in-out infinite;
+}
+.preloader.is-loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+@keyframes preloader-pulse {
+  0%, 100% { opacity: .45; transform: scale(.97); }
+  50%      { opacity: 1;   transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .preloader { transition: opacity .3s ease; }
+  .preloader__logo { animation: none; opacity: .95; }
+}
+
+/* =====================================================
    ATO I — HERO · vídeo loop + toggle de áudio
    Vídeo cobre o hero, atrás do conteúdo. .hero-water
    (CSS animations) fica em z-index ainda mais baixo como
