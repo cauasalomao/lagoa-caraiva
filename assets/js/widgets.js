@@ -7,7 +7,7 @@
 
   var BOOKING_BASE = 'https://hotels.cloudbeds.com/pt-br/reservation/zeLyfj/';
   var WA_NUMBER = '557399856862';
-  var WEBHOOK_URL = 'https://webhook.cidigitalmarketing.com/webhook/7c87bd71-6c33-437f-9073-2fae80d76d2f';
+  var WEBHOOK_URL = 'https://webhook.komplexagrowth.com/webhook/7c87bd71-6c33-437f-9073-2fae80d76d2f';
   var HOTEL_NAME = 'Pousada Lagoa Caraíva';
 
   function sendToWebhook(payload) {

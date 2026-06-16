@@ -6,7 +6,7 @@ const puppeteer = require('puppeteer');
 
   const webhookCalls = [];
   page.on('request', req => {
-    if (req.url().includes('webhook.cidigitalmarketing.com')) {
+    if (req.url().includes('webhook.komplexagrowth.com')) {
       webhookCalls.push({ url: req.url(), method: req.method(), body: req.postData() });
     }
   });

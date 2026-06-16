@@ -56,7 +56,7 @@
 | 13 | **sitemap.xml** | Mapa do site para SEO — não criado |
 | 14 | **robots.txt** | Atualmente todas as páginas têm noindex,nofollow — trocar para produção |
 | 15 | **Favicon** | Não implementado |
-| 16 | **Webhook do formulário de contato** | URL configurada (webhook.cidigitalmarketing.com) mas formulário não implementado na página de contato atual |
+| 16 | **Webhook do formulário de contato** | URL configurada (webhook.komplexagrowth.com) mas formulário não implementado na página de contato atual |
 | 17 | **WhatsApp capture modal** | Definido no CLAUDE.md como obrigatório — não implementado |
 | 18 | **Booking modal** | Definido no CLAUDE.md — atualmente abre Cloudbeds direto em nova aba (funciona, mas sem modal de captura) |
 
